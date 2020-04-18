@@ -1,0 +1,63 @@
+<resources>
+    <string name="app_name">TrackIt</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+
+    <string name="menu_profile">Profile</string>
+    <string name="menu_how_to">How to use TrackIt</string>
+    <string name="menu_new_game">Start A New Game</string>
+    <string name="menu_games_list">Saved Games</string>
+
+
+    <!-- the ActionBarDrawerToggle class needs two strings as an input  -->
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="sign_up_welcome_title">Welcome to TrackIt</string>
+    <string name="sign_up_slogan_title">Track Your Team\'s Goals in time</string>
+    <string name="continue_with_google_button">Continue with Google</string>
+    <string name="continue_with_email_button">Continue with Email</string>
+    <string name="got_it_button">Ok, Got It</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="Introduction_step_one_title">How To Number One</string>
+    <string name="introduction_step_one_description">One Click on this button to view the card game progress and save this progress to your games list history.</string>
+    <string name="introduction_step_two_title">How To Number Two</string>
+    <string name="introduction_step_two_description">Two Click on this button to view the card game progress and save this progress to your games list history.</string>
+    <string name="introduction_step_three_title">How To Number Three</string>
+    <string name="introduction_step_three_description">Three Click on this button to view the card game progress and save this progress to your games list history.</string>
+    <string name="start_a_new_game_button">Start A New Game</string>
+    <string name="update_teams_fragment_title">Name Your Teams</string>
+    <string name="update_teams_fragment_home_team">Home</string>
+    <string name="update_teams_fragment_away_team">Away</string>
+    <string name="update_teams_fragment_update_button">Update</string>
+    <string name="update_teams_fragment_skip_button">Skip</string>
+    <string name="update_teams_fragment_away_hint">Ex: England</string>
+    <string name="update_teams_fragment_home_hint">Ex: Germany</string>
+    <string name="game_counter_fragment_home_title">Home</string>
+    <string name="game_counter_fragment_zero_text">0</string>
+    <string name="game_counter_fragment_reset_button">Reset</string>
+    <string name="game_counter_fragment_save_game_button">Save Game</string>
+    <string name="game_counter_fragment_away_title">Away</string>
+    <string name="game_counter_fragment_goal_button">Goal</string>
+    <string name="game_counter_fragment_foul_button">Foul</string>
+    <string name="game_counter_fragment_reset_button_change">Start A New Game</string>
+    <string name="save_game_popup_call_to_action">Start A New Game</string>
+    <string name="save_game_popup_win_situation">Congratulations, You Won!</string>
+    <string name="save_game_popup_loss_situation">Good Luck Next Time!</string>
+    <string name="save_game_popup_tie_situation">Tie! Next Time Your Team will win</string>
+    <string name="user_profile_self_intoduction">self introduction</string>
+    <string name="user_profile_update_button">Update</string>
+    <string name="user_profile_logout_button">Log Out</string>
+    <string name="saved_games_fragment_no_saved_games_title">No Saved Games Yet</string>
+    <string name="edit_profile_fragment_title">Update your profile</string>
+    <string name="edit_profile_fragment_name_hint">Display Name</string>
+    <string name="edit_profile_fragment_email_hint">Display Email</string>
+    <string name="edit_profile_fragment_introduction_hint">Intro about yourself (Max 3 Lines)</string>
+    <string name="edit_profile_fragment_save_button">Save</string>
+
+
+</resources>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/introduction_image"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        tools:src="@drawable/designed_intro_one_zoom"
+        android:scaleType="centerCrop"
+        android:layout_margin="8dp"/>
+
+    <TextView
+        android:id="@+id/title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="How To Number One"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="24sp"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/alfa_slab_one"/>
+
+    <TextView
+        android:id="@+id/description_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="One Click on this button to view the card game progress and save this progress to your games list history."
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:maxLines="4"
+        android:layout_margin="8dp"
+        android:fontFamily="@font/alfa_slab_one" />
+
+</LinearLayout>
+

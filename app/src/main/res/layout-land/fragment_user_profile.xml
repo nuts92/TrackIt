@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/gradient_background">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="16dp"
+        android:layout_margin="16dp"
+        android:paddingBottom="16dp"
+        android:background="@drawable/user_profile_white_background">
+
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="24dp"
+            tools:text="Marian Hart"
+            android:textSize="24sp"
+            android:textColor="@color/colorPrimaryDark"
+            android:fontFamily="@font/alfa_slab_one"
+            android:maxLines="1" />
+
+        <TextView
+            android:id="@+id/user_email"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/user_name"
+            android:layout_marginBottom="8dp"
+            android:gravity="center"
+            android:lines="1"
+            tools:text="team@trackit.com"
+            android:textSize="20sp"
+            android:fontFamily="@font/alfa_slab_one"
+            android:padding="8dp"/>
+
+
+        <Space
+            android:id="@+id/spaceHolder"
+            android:layout_width="10dp"
+            android:layout_height="0dp"
+            android:layout_below="@id/user_email"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:id="@+id/logout_button"
+            android:layout_width="150dp"
+            android:layout_height="60dp"
+            android:layout_toLeftOf="@id/spaceHolder"
+            android:layout_toStartOf="@id/spaceHolder"
+            android:layout_below="@id/user_email"
+            android:layout_marginBottom="16dp"
+            android:paddingStart="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingEnd="10dp"
+            android:background="@drawable/user_profile_logout_button"
+            android:textColor="@color/white"
+            android:text="@string/user_profile_logout_button"
+            android:textSize="18sp"
+            android:fontFamily="@font/alfa_slab_one" />
+
+        <Button
+            android:id="@+id/edit_profile_button"
+            android:layout_width="150dp"
+            android:layout_height="60dp"
+            android:layout_toRightOf="@id/spaceHolder"
+            android:layout_toEndOf="@id/spaceHolder"
+            android:layout_below="@id/user_email"
+            android:layout_marginBottom="16dp"
+            android:paddingStart="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingEnd="10dp"
+            android:background="@drawable/user_profile_update_button"
+            android:textColor="@color/colorPrimary"
+            android:text="@string/user_profile_update_button"
+            android:textSize="16sp"
+            android:fontFamily="@font/alfa_slab_one" />
+
+        <TextView
+            android:id="@+id/user_self_introduction"
+            android:layout_width="310dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/logout_button"
+            android:gravity="center"
+            android:lines="3"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:text="@string/user_profile_self_intoduction"
+            android:textSize="18sp"
+            android:fontFamily="@font/alfa_slab_one"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/user_profile_photo"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/default_avatar"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_alignParentTop="true"
+            app:civ_border_width="5dp"
+            app:civ_border_color="@color/colorPrimary"/>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
