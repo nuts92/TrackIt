@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_background"
+    android:background="@drawable/new_gradient"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:padding="8dp"
@@ -32,10 +32,14 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:fontFamily="@font/alfa_slab_one"
         android:text="@string/sign_up_slogan_title"
         android:textAlignment="center"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/yellow_introduction"
         android:textSize="18sp" />
 
     <Button
@@ -48,13 +52,13 @@
         android:layout_marginEnd="30dp"
         android:layout_marginRight="30dp"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/button_style"
+        android:background="@drawable/button_style_one"
         android:fontFamily="@font/alfa_slab_one"
+        android:padding="16dp"
         android:text="@string/continue_with_google_button"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textSize="20sp" />
 
     <Button
         android:id="@+id/email_log_in_button"
@@ -64,14 +68,14 @@
         android:layout_marginLeft="30dp"
         android:layout_marginEnd="30dp"
         android:layout_marginRight="30dp"
-        android:layout_marginBottom="30dp"
-        android:background="@drawable/button_style"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button_style_one"
         android:fontFamily="@font/alfa_slab_one"
+        android:padding="16dp"
         android:text="@string/continue_with_email_button"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textSize="20sp" />
 
 </LinearLayout>
 

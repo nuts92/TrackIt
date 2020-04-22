@@ -13,6 +13,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.android.trackit.introduction_fragments.IntroductionFragmentFive;
+import com.example.android.trackit.introduction_fragments.IntroductionFragmentFour;
 import com.example.android.trackit.introduction_fragments.IntroductionFragmentOne;
 import com.example.android.trackit.introduction_fragments.IntroductionFragmentThree;
 import com.example.android.trackit.introduction_fragments.IntroductionFragmentTwo;
@@ -25,11 +27,10 @@ import com.google.android.material.tabs.TabLayout;
 public class IntroductionActivity extends AppCompatActivity {
 
      //Declaring and initialing a constant that represents the number of pages (wizard steps) to be displayed.
-    private static final int NUM_PAGES = 3;
+    private static final int NUM_PAGES = 5;
 
     //Declaring the ViewPager widget, which handles animation and allows swiping horizontally to access previous
     // and next wizard steps.
-
     private ViewPager mViewPager;
 
     @Override
@@ -40,17 +41,17 @@ public class IntroductionActivity extends AppCompatActivity {
         //Initializing the mViewPager Object Variable
         mViewPager = findViewById(R.id.pager);
 
-        // the pagerAdapter, which provides the pages to the ViewPager widget.
+        //Declaring and initializing the pagerAdapter, which provides the pages to the ViewPager widget.
         SlideAdapter pagerAdapter = new SlideAdapter(getSupportFragmentManager());
 
         // Declaring and initializing the tabLayout and the nextButton object variables.
         TabLayout tabLayout = findViewById(R.id.indicator);
         Button nextButton = findViewById(R.id.next_button);
 
-        //Setting the Adapter to the ViewPager through the setAdapter method
+        //Setting the Adapter to the ViewPager through the setAdapter method.
         mViewPager.setAdapter(pagerAdapter);
 
-        // Setting up the TabLayout with the ViewPager
+        // Setting up the TabLayout with the ViewPager.
         tabLayout.setupWithViewPager(mViewPager);
 
         //Attaching an OnClickListener to the nextButton that determines the behavior that will happen
@@ -67,25 +68,23 @@ public class IntroductionActivity extends AppCompatActivity {
      * finishBoarding() method saves the state of whether the user has finished the introduction wizard onBoarding or not
      * and then redirects the user to the MainActivity.
      */
-
     private void finishBoarding() {
+
         //Get the sharedPreferences by calling getSharedPreferences method that returns a SharedPreference instance
         // pointing to the file that contains the values of preferences.
         SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
 
         //Save data changes in SharedPreferences by calling edit() method of SharedPreferences class which returns Editor class object.
         //call putBoolean method to save a boolean value in a preference editor and Set onBoardingComplete to true
-
         SharedPreferences.Editor editor =sharedPreferences.edit();
         editor.putBoolean("onBoardingComplete", true).apply();
 
-        // Launch the main Activity, called MainActivity
+        // Open the MainActivity by passing intent as an input argument to startActivity method
         Intent intent = new Intent(IntroductionActivity.this, SignUpActivity.class);
         startActivity(intent);
 
-        // Close the IntroductionActivity so that when user presses the back, he/she won't go back to this introduction wizard
+        // Close the IntroductionActivity so that when user presses the back button, he/she won't go back to this introduction wizard
         finish();
-
     }
 
     /**
@@ -93,9 +92,10 @@ public class IntroductionActivity extends AppCompatActivity {
      */
     @Override
     public void onBackPressed() {
+
+        // If the user is currently looking at the first step, allow the system to handle the
+        // Back button. This calls finish() on this activity and pops the back stack.
         if (mViewPager.getCurrentItem() == 0) {
-            // If the user is currently looking at the first step, allow the system to handle the
-            // Back button. This calls finish() on this activity and pops the back stack.
             super.onBackPressed();
         } else {
             // Otherwise, select the previous step.
@@ -105,7 +105,7 @@ public class IntroductionActivity extends AppCompatActivity {
 
     /**
      * This Class provides the Adapter to populate pages inside of the ViewPager
-     * The pages represent 3 FragmentOne objects, in sequence.
+     * The pages represent 5 Fragment objects, in sequence.
      */
     private class SlideAdapter extends FragmentStatePagerAdapter {
 
@@ -118,28 +118,29 @@ public class IntroductionActivity extends AppCompatActivity {
          * @param position int: the position of the Fragment in the pager.
          * @return Fragment: returns the Fragment associated with a specified position.
          */
-
         @NonNull
         @Override
         public Fragment getItem(int position) {
             switch (position) {
-                case 0: // Fragment # 1 - This will show First Introduction Fragment
+                case 0: // Fragment number 1 - This will show First Introduction Fragment
                     return new IntroductionFragmentOne();
-                case 1: // Fragment # 2 - This will show Second Introduction Fragment
+                case 1: // Fragment number 2 - This will show Second Introduction Fragment
                     return new IntroductionFragmentTwo();
-                case 2:  // Fragment # 3 - This will show the Third Introduction Fragment
+                case 2:  // Fragment number 3 - This will show the Third Introduction Fragment
                     return new IntroductionFragmentThree();
+                case 3:  // Fragment number 4 - This will show the Fourth Introduction Fragment
+                    return new IntroductionFragmentFour();
+                case 4:  // Fragment number 5 - This will show the Fifth Introduction Fragment
+                    return new IntroductionFragmentFive();
                 default:
                     return null;
             }
-
         }
 
         /**
          * This method counts the number of views/fragments that are in the data set represented by this Adapter.
-         * @return int the number of views available, in this case 3 Fragment objects
+         * @return int the number of views available, in this case 5 Fragment objects
          */
-
         @Override
         public int getCount() {
             return NUM_PAGES;

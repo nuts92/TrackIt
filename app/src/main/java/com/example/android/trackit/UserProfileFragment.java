@@ -35,133 +35,126 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
-
 /**
- * A simple {@link Fragment} subclass.
+ * UserProfileFragment subclass displays the user profile information including the user photo if it exists, user name, and user
+ * self introduction if it exists in addition to the log out and update profile options.
  */
 public class UserProfileFragment extends Fragment {
 
-    private FirebaseUser currentUser;
-
+    //Declaring all Object Variables
     private String userId;
 
-    private FirebaseFirestore db;
-    
-    private  ImageView mUserProfilePhotoView;
+    private ImageView mUserProfilePhotoView;
+
     private TextView mUserNameView;
+
     private TextView mUserEmailView;
-    
-    private  TextView mUserSelfIntroductionView;
-    
+
+    private TextView mUserSelfIntroductionView;
 
     public UserProfileFragment() {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_user_profile, container, false);
 
+        //Initializing all Object Variables
         mUserProfilePhotoView = rootView.findViewById(R.id.user_profile_photo);
+
         mUserNameView = rootView.findViewById(R.id.user_name);
+
         mUserEmailView = rootView.findViewById(R.id.user_email);
 
         mUserSelfIntroductionView = rootView.findViewById(R.id.user_self_introduction);
+
         Button editProfileButton = rootView.findViewById(R.id.edit_profile_button);
 
         Button logOutButton = rootView.findViewById(R.id.logout_button);
 
-
+        //Declaring and Initializing an instance of FirebaseAuth
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
-        db = FirebaseFirestore.getInstance();
+        //Declaring and Initializing an instance of FirebaseFirestore database
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        currentUser = mAuth.getCurrentUser();
+        //Declaring and initializing an instance of FirebaseUser
+        FirebaseUser currentUser = mAuth.getCurrentUser();
 
         if (currentUser != null) {
+            //Get the currentUserId from the currentUser which will be used to get user data from FirebaseFirestore database
             userId = currentUser.getUid();
-
         }
 
+        //Check if the user has data stored in Firestore database by initializing a userDocumentReference based on the unique userId,
+        // the user data is stored in a document and the name of the document is the unique userId in a collection called "Users"
         DocumentReference userDocumentReference = db.collection("Users").document(userId);
 
+        //Get the user document which contains information including updated name, self introduction, photo, etc.
         userDocumentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
 
+                if (e != null) {
+                    Log.e("UserProfileFragment", e.toString());
+                    return;
+                }
+
                 //Retrieve the user data by creating a retrievedData object from the documentSnapshot which is basically the user document
+                if (documentSnapshot != null) {
 
-                if(documentSnapshot != null){
+                    UserData retrievedData = documentSnapshot.toObject(UserData.class);
 
-                UserData retrievedData = documentSnapshot.toObject(UserData.class);
-                //check if there is data stored and not null, this will be null if the user is new and didn't update the profile data
-                if (retrievedData != null) {
-                    displayDatabaseInfo(retrievedData);
+                    if (retrievedData != null) {
+
+                        //Call displayDatabaseInfo to display the user data stored in Firestore Database
+                        displayDatabaseInfo(retrievedData);
+                    }
                 }
-                }else {
-                    //in case the user is new user and no data stored in database
+            }
+        });
 
-                    displayAuthData();
-                }
-            }});
-
-//                get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-//            @Override
-//            public void onSuccess(DocumentSnapshot documentSnapshot) {
-//
-//                //Retrieve the user data by creating a retrievedData object from the documentSnapshot which is basically the user document
-//
-//                UserData retrievedData = documentSnapshot.toObject(UserData.class);
-//                //check if there is data stored and not null, this will be null if the user is new and didn't update the profile data
-//                if (retrievedData != null) {
-//                    displayDatabaseInfo(retrievedData);
-//                } else {
-//                    //in case the user is new user and no data stored in database
-//
-//                    displayAuthData();
-//                }
-//            }
-//        });
-
+        //Attaching an OnClickListener to the editProfileButton that determines the behavior that will happen
+        // when the user clicks on that button
         editProfileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                // Create a new Fragment to be placed in the activity layout
-                EditProfileFragment editProfileFragment = new EditProfileFragment();
+                //Open the UpdateUserProfileActivity through passing openIntent to startActivity method
+                Intent openIntent = new Intent(getActivity(), UpdateUserProfileActivity.class);
 
-                //create a FragmentTransaction to begin the transaction and replace the Fragment
-                if(getActivity()!=null) {
-                    FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-                    // Replace whatever is in the fragment_container view with this fragment
-                    fragmentTransaction.replace(R.id.fragment_container, editProfileFragment);
-                    // and add the transaction to the back stack so the user can navigate back
-                    fragmentTransaction.addToBackStack(null);
-                    // Commit the transaction
-                    fragmentTransaction.commit();
-                }
-
+                startActivityForResult(openIntent,0);
             }
         });
 
+        //Attaching an OnClickListener to the logOutButton that determines the behavior that will happen
+        // when the user clicks on that button
         logOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AuthUI.getInstance()
-                        .signOut(getActivity())
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            public void onComplete(@NonNull Task<Void> task) {
-                                // user is now signed out
-                                startActivity(new Intent(getActivity(), SignUpActivity.class));
-                                // display a message by using a Toast
-                                Toast.makeText(getActivity(), "You've Signed Out", Toast.LENGTH_SHORT).show();
-//                                    finish();//to finish your activity from fragment.
-                                getActivity().finish();
-                            }
-                        });
+
+                //Sign out the user, finish the MainActivity and open the SignUpActivity
+                if (getActivity() != null) {
+                    AuthUI.getInstance()
+                            .signOut(getActivity())
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                public void onComplete(@NonNull Task<Void> task) {
+
+                                    // user is now signed out
+                                    startActivity(new Intent(getActivity(), SignUpActivity.class));
+
+                                    // Display a Toast Message that says the user has signed out
+                                    Toast.makeText(getActivity(), "You've Signed Out", Toast.LENGTH_SHORT).show();
+
+                                    //Finish the activity from the fragment.
+                                    getActivity().finish();
+                                }
+                            });
+                }
             }
         });
 
@@ -169,100 +162,47 @@ public class UserProfileFragment extends Fragment {
         return rootView;
     }
 
-    private void displayAuthData() {
-        //this is the case of a new user with no data stored in firestore database yet, so we get the data to be displayed
-        //from the firebase auth instance when the user has signed in with email or google
-        //first part for display the info
-
-        String userDisplayName = currentUser.getDisplayName();
-        mUserNameView.setText(userDisplayName);
-
-        String userDisplayEmail = currentUser.getEmail();
-        mUserEmailView.setText(userDisplayEmail);
-
-        Uri userPhotoUri = null;
-
-        //if users signs up with email option, he/she won't have a photo to be displayed so it will be null
-        //but if the user signed up with google he will have a display image
-
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            /* For devices equal or higher than lollipop set the translation above everything else */
-            mUserProfilePhotoView.setTranslationZ(6);
-            /* Redraw the view to show the translation */
-            mUserProfilePhotoView.invalidate();
-        }
-
-        if(currentUser.getPhotoUrl() != null) {
-
-            userPhotoUri = currentUser.getPhotoUrl();
-            Glide.with(UserProfileFragment.this).load(userPhotoUri).into(mUserProfilePhotoView);
-        }
-
-        //default self introduction
-
-        String userIntroduction = getString(R.string.user_profile_self_intoduction);
-        mUserSelfIntroductionView.setText(userIntroduction);
-
-        //Second part for creating a user document in database/ storing data from FirebaseAuth in database
-
-        //changing uri to a string required for firestore database so that it can serialize the object
-        // and does not give an error of  exceed minimum depth of 500
-        String userPhoto = null;
-        if(userPhotoUri != null){
-          userPhoto = userPhotoUri.toString();
-
-        }
-                //to create a user document based on the user ID in users collection in Firestore database
-                //Create an  new object of UserData to pass to the db
-                UserData userData = new UserData(userDisplayName, userDisplayEmail, userPhoto, userIntroduction);
-                db.collection("Users").document(userId).set(userData).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        //if uploading data to database is successful
-                        Log.d("ProfileFragment", "User Data is saved Successfully");
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.e("ProfileFragment", e.toString());
-
-                    }
-                });
-
-    }
+    /**
+     * This method retrieves and displays the user data stored in Firestore Database
+     *
+     * @param retrievedData UserData: is the user data stored in user document in Firestore database
+     */
 
     private void displayDatabaseInfo(UserData retrievedData) {
+
+        //Get the username, email, self introduction, and photo from the retreivedData Object
         String userName = retrievedData.getUserDisplayName();
+
         String userEmail = retrievedData.getUserEmail();
+
         String userIntro = retrievedData.getUserIntroduction();
+
         String userPhotoUrl = retrievedData.getUserPhoto();
 
+        //Display the retrieved username and email in the mUserNameView and mUserEmailView object variables
         mUserNameView.setText(userName);
         mUserEmailView.setText(userEmail);
 
-        //if the userIntro is not null set the updated text to the textview otherwise leave the default text that was referenced to in the xml layout
-        //it will be null if the user didn't update the intro/ this is no problem anymore
-        if(userIntro != null){
+        //if the retrieved user Introduction is not null then display it in the mUserSelfIntroductionView. Otherwise the default
+        //introduction will be displayed, this self introduction  will be null if the user didn't update it in EditProfile
+        if (userIntro != null) {
             mUserSelfIntroductionView.setText(userIntro);
         }
-        // else set text to string is better
 
-        //this will be null in case the user has entered the app before with email sign in option and didn't update
-        //the profile photo and left it to the default avatar/however if this is the case, there is user data but no
-        //photo url then need to set photo to avatar
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//
+//            //For devices equal or higher than lollipop set the translation above everything else
+//            mUserProfilePhotoView.setTranslationZ(6);
+//
+//            //Redraw the view to show the translation
+//            mUserProfilePhotoView.invalidate();
+//        }
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            /* For devices equal or higher than lollipop set the translation above everything else */
-            mUserProfilePhotoView.setTranslationZ(6);
-            /* Redraw the view to show the translation */
-            mUserProfilePhotoView.invalidate();}
-
-        if(userPhotoUrl != null) {
+        //if the retrieved user photo is not null then display it in the mUserProfilePhotoView. Otherwise the default avatar
+        // will be displayed, this photo will be null if the user signed up with the email option and did not update the profile photo.
+        if (userPhotoUrl != null) {
 
             Glide.with(UserProfileFragment.this).load(userPhotoUrl).into(mUserProfilePhotoView);
-
-
-            }
+        }
     }
-
 }

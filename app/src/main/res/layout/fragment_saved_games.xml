@@ -3,27 +3,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SavedGamesFragment"
-    android:background="@color/white">
+    android:background="@drawable/other_gradient"
+    tools:context=".SavedGamesFragment">
 
     <TextView
         android:id="@+id/emptyInfoTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
+        android:layout_gravity="center"
         android:layout_margin="36dp"
         android:background="@drawable/gradient_button_background"
         android:fontFamily="@font/alfa_slab_one"
         android:gravity="center"
         android:padding="36dp"
         android:text="@string/saved_games_fragment_no_saved_games_title"
+        android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        android:visibility="gone" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
+        android:layout_height="match_parent" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

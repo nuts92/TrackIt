@@ -5,12 +5,11 @@ import com.google.firebase.firestore.ServerTimestamp;
 import java.util.Date;
 
 /**
- * //note that the format here is imp for firestore to work properly like for example the empty constructor
- * //A few things to note about this model class:
- * //The getters and setters follow the JavaBean naming pattern which allows Firestore to map the data to field names (ex: getName() provides the name field).
- * //The class has an empty constructor, which is required for Firestore's automatic data mapping.
+ * This class is a Data Model Class that stores the Saved Game Results and it follows the JavaBean naming pattern which allows Firestore
+ * to automatically map values when getting and setting data. The rules that the pattern follows are that:
+ * Getter and Setter methods are defined which are strictly named to what variable they correspond to (for example: getName() provides the name field).
+ * An extra empty constructor is also defined which lets Firestore do the automatic data mapping.
  */
-
 public class SavedGame {
 
     private String homeTeam;
@@ -33,7 +32,6 @@ public class SavedGame {
         //empty constructor is required for Firestore's automatic data mapping.
     }
 
-
     public SavedGame(String homeTeam, String awayTeam, int homeScore, int awayScore, int homeFouls,
                      int awayFouls, String winner) {
         this.homeTeam = homeTeam;
@@ -43,7 +41,6 @@ public class SavedGame {
         this.homeFouls = homeFouls;
         this.awayFouls = awayFouls;
         this.winner = winner;
-
     }
 
     public String getHomeTeam() {

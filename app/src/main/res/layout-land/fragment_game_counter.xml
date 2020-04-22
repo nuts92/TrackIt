@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:scrollbarAlwaysDrawVerticalTrack="true"
+    android:scrollbarSize="10dp"
+    android:scrollbarStyle="insideOverlay"
     tools:context=".GameCounterFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/new_gradient"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -23,94 +26,98 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="8dp"
+                android:fontFamily="@font/alfa_slab_one"
                 android:padding="4dp"
                 android:text="@string/game_counter_fragment_home_title"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textColor="@color/white"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/home_score"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="16dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="10dp"
                 android:background="@drawable/gradient_button_background"
                 android:gravity="center_horizontal"
                 android:padding="4dp"
                 android:text="@string/game_counter_fragment_zero_text"
                 android:textColor="@color/white"
-                android:textSize="32sp" />
+                android:textSize="32sp"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/home_goal_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
+                android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/custom_game_counter_button"
+                android:fontFamily="@font/alfa_slab_one"
                 android:text="@string/game_counter_fragment_goal_button"
                 android:textColor="@color/white"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/home_fouls"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
                 android:layout_marginBottom="10dp"
-                android:background="@drawable/gradient_button_background"
+                android:background="@drawable/gradient_background"
                 android:gravity="center_horizontal"
                 android:padding="4dp"
                 android:text="@string/game_counter_fragment_zero_text"
                 android:textColor="@color/white"
-                android:textSize="32sp" />
+                android:textSize="32sp"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/home_foul_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/custom_game_counter_button"
+                android:fontFamily="@font/alfa_slab_one"
                 android:text="@string/game_counter_fragment_foul_button"
                 android:textColor="@color/white"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/reset_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="10dp"
-                android:background="@color/colorPrimaryDark"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="12dp"
+                android:background="@color/colorAccent"
+                android:fontFamily="@font/alfa_slab_one"
                 android:text="@string/game_counter_fragment_reset_button"
                 android:textColor="@color/white"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textSize="20sp" />
 
         </LinearLayout>
 
         <View
             android:layout_width="1dp"
-            android:layout_height="225dp"
-            android:background="@android:color/darker_gray"
-            android:layout_marginTop="45dp"/>
+            android:layout_height="200dp"
+            android:layout_marginTop="60dp"
+            android:background="@color/white" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -124,93 +131,94 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="8dp"
+                android:fontFamily="@font/alfa_slab_one"
                 android:padding="4dp"
                 android:text="@string/game_counter_fragment_away_title"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textColor="@color/white"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/away_score"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="16dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="10dp"
                 android:background="@drawable/gradient_button_background"
                 android:gravity="center_horizontal"
                 android:padding="4dp"
                 android:text="@string/game_counter_fragment_zero_text"
                 android:textColor="@color/white"
-                android:textSize="32sp" />
+                android:textSize="32sp"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/away_goal_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/custom_game_counter_button"
+                android:fontFamily="@font/alfa_slab_one"
                 android:text="@string/game_counter_fragment_goal_button"
                 android:textColor="@color/white"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/away_fouls"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
                 android:layout_marginBottom="10dp"
-                android:background="@drawable/gradient_button_background"
+                android:background="@drawable/gradient_background"
                 android:gravity="center_horizontal"
                 android:padding="4dp"
                 android:text="@string/game_counter_fragment_zero_text"
                 android:textColor="@color/white"
-                android:textSize="32sp" />
+                android:textSize="32sp"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/away_foul_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/custom_game_counter_button"
+                android:fontFamily="@font/alfa_slab_one"
                 android:text="@string/game_counter_fragment_foul_button"
                 android:textColor="@color/white"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/save_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="10dp"
-                android:background="@color/colorPrimaryDark"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="12dp"
+                android:background="@color/colorAccent"
+                android:fontFamily="@font/alfa_slab_one"
                 android:text="@string/game_counter_fragment_save_game_button"
                 android:textColor="@color/white"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textSize="20sp" />
 
         </LinearLayout>
 
     </LinearLayout>
 
-
-</RelativeLayout>
+</ScrollView>
 

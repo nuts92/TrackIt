@@ -16,24 +16,21 @@ import android.widget.ImageView;
  */
 public class SplashActivity extends AppCompatActivity {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        //Declaring and initializing splashTimeOut variable which represents the amount of time that the splash screen will be displayed
-
+        //Declaring and initializing splashTimeOut variable which represents the amount of time that the splash screen will be displayed.
         int splashTimeOut = 3000;
 
         //Set time to handler and call Handler().postDelayed, it will call run method of runnable after set time and redirect either to
         // the IntroductionActivity or SignUpActivity based on whether the introWizard onBoarding is complete or not.
-
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
 
-                //get reference of SharedPreferences object by calling getSharedPreferences (String name,int mode).
+                //Get reference of SharedPreferences object by calling getSharedPreferences (String name,int mode).
                 // This returns a SharedPreference instance pointing to the file "MyPrefs" that contains the values of preferences.
                 SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
 
@@ -57,13 +54,10 @@ public class SplashActivity extends AppCompatActivity {
                 , splashTimeOut);
 
         // Declaring and initializing the animation and logo object variables
-
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.transition_animation);
-
         ImageView logo = findViewById(R.id.logo);
 
-        //setting and assigning the animation object to the logo ImageView object so that the logo is displayed with this animation
-
+        //setting and assigning the animation object to the logo ImageView object so that the logo is displayed with this animation.
         logo.setAnimation(animation);
 
     }

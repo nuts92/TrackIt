@@ -5,26 +5,23 @@
 
         <item
             android:id="@+id/nav_new_game"
-            android:title="@string/menu_new_game"
-            android:icon="@drawable/ic_start_game_black"/>
+            android:icon="@drawable/ic_start_game_black"
+            android:title="@string/menu_new_game" />
 
         <item
             android:id="@+id/nav_how_to"
-            android:title="@string/menu_how_to"
             android:icon="@drawable/ic_help"
-            />
+            android:title="@string/menu_how_to" />
 
         <item
             android:id="@+id/nav_profile"
-            android:title="@string/menu_profile"
-            android:icon="@drawable/ic_profile"/>
+            android:icon="@drawable/ic_profile"
+            android:title="@string/menu_profile" />
 
         <item
             android:id="@+id/nav_saved_games"
-            android:title="@string/menu_games_list"
-            android:icon="@drawable/ic_saved_game"/>
-
-
+            android:icon="@drawable/ic_saved_game"
+            android:title="@string/menu_games_list" />
 
     </group>
 

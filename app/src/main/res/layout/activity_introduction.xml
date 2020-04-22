@@ -4,45 +4,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/new_gradient"
     android:orientation="vertical"
-    tools:context=".IntroductionActivity"
-    android:background="@drawable/gradient_background">
+    tools:context=".IntroductionActivity">
 
-    <FrameLayout
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/pager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp"
+        android:layout_margin="16dp"
+        android:layout_weight="1" />
 
-
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/pager"
-            android:layout_width="match_parent"
-            android:layout_height="550dp" />
-
-        <!-- TabLayout to show indicator of the current selected page in the ViewPager -->
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/indicator"
-            android:layout_width="match_parent"
-            android:layout_height="16dp"
-            android:layout_gravity="center|bottom"
-            android:layout_marginBottom="16dp"
-            app:tabBackground="@drawable/pager_selector_indicator"
-            app:tabGravity="center"
-            app:tabIndicatorHeight="0dp" />
-
-
-    </FrameLayout>
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/indicator"
+        android:layout_width="match_parent"
+        android:layout_height="16dp"
+        android:layout_gravity="center|bottom"
+        android:layout_marginBottom="16dp"
+        app:tabBackground="@drawable/pager_selector_indicator"
+        app:tabGravity="center"
+        app:tabIndicatorHeight="0dp" />
 
     <Button
         android:id="@+id/next_button"
-        android:layout_width="330dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/got_it_button"
-        android:textColor="@android:color/white"
-        android:textSize="24sp"
         android:layout_gravity="center_horizontal"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/gradient_button_background"
-        android:layout_margin="16dp"
         android:fontFamily="@font/alfa_slab_one"
-        android:textAllCaps="false" />
+        android:padding="4dp"
+        android:text="@string/got_it_button"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="24sp" />
 
 </LinearLayout>

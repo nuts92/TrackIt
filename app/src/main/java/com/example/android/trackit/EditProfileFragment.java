@@ -2,6 +2,7 @@ package com.example.android.trackit;
 
 
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.android.trackit.models.UserData;
@@ -33,191 +35,266 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static android.app.Activity.RESULT_OK;
 
-
 /**
- * A simple {@link Fragment} subclass.
+ * EditProfileFragment subclass displays a screen where the user can update his/her photo, name, and self introduction.
  */
 public class EditProfileFragment extends Fragment {
 
+    //Declaring and initializing an arbitrary request code constant value
     private static final int PICK_IMAGE_REQUEST = 1;
+
+    //Declaring all Object Variables
+    private ImageView mDisplayedUserPhoto;
+
+    private EditText mUserNameEditText;
+
+    private EditText mUserIntroductionEditText;
 
     private FirebaseFirestore db;
 
     private String userId;
 
-    private Uri mChosenPhotoUri;
-
-    private ImageView mDisplayedUserPhoto;
-
-    private StorageReference mStorageReference;
+    private Uri chosenPhotoUri;
 
     private UserData updatedUserData;
 
-
-    private String mDownloadUrl;
-
-    private EditText userNameEditText;
-
-    private EditText userEmailEditText;
-
-    private EditText userIntroductionEditText;
-
-    private String currentUserName;
-
-    private String currentUserEmail;
-
-    private String currentUserIntroduction;
-
-    private String currentUserPhotoUrl;
-
-
+    private String downloadUrl;
 
     public EditProfileFragment() {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_edit_profile, container, false);
 
+        //Initializing the mDisplayedUserPhoto, userNameEditText, and userIntroductionEditText object variables
         mDisplayedUserPhoto = rootView.findViewById(R.id.edit_user_profile_photo);
 
-        ImageView updatePhotoButton = rootView.findViewById(R.id.edit_user_photo_picker_button);
+        mUserNameEditText = rootView.findViewById(R.id.edit_name_view);
 
-        userNameEditText = rootView.findViewById(R.id.edit_name_view);
-        userEmailEditText = rootView.findViewById(R.id.edit_email_view);
-        userIntroductionEditText = rootView.findViewById(R.id.edit_intro_view);
+        mUserIntroductionEditText = rootView.findViewById(R.id.edit_intro_view);
 
-        Button saveProfileButton = rootView.findViewById(R.id.save_profile_button);
+        //Declaring and initializing the updatePhotoButton and the saveProfileButton object variables
+        ImageView mUpdatePhotoButton = rootView.findViewById(R.id.edit_user_photo_picker_button);
 
+        Button mSaveProfileButton = rootView.findViewById(R.id.save_profile_button);
+
+        //Declaring and Initializing an instance of FirebaseFirestore database
         db = FirebaseFirestore.getInstance();
 
-        mStorageReference = FirebaseStorage.getInstance().getReference("users uploads");
-
+        //Declaring and Initializing an instance of FirebaseAuth
         FirebaseAuth auth = FirebaseAuth.getInstance();
 
+        //Declaring and initializing an instance of FirebaseUser
         FirebaseUser currentUser = auth.getCurrentUser();
 
-        updatedUserData = new UserData();
-
+        //Get the currentUserId from the currentUser which will be used to get data from FirebaseFirestore database
         if (currentUser != null) {
 
             userId = currentUser.getUid();
-
         }
 
+        //Initializing the updatedUserData object variable which is currently an empty object which will be filled later
+        updatedUserData = new UserData();
 
-            db.collection("Users").document(userId).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                @Override
-                public void onSuccess(DocumentSnapshot documentSnapshot) {
+        //Get the user document that contains information including name, email, self introduction, photo, etc.
+        // the user data is stored in a document and the name of the document is the unique userId in a collection called "Users"
+        db.collection("Users").document(userId).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                if (documentSnapshot != null) {
+
+                    //Retrieve the user data by creating a userData object from the documentSnapshot which is basically the user document
                     UserData userData = documentSnapshot.toObject(UserData.class);
+
                     if (userData != null) {
 
-                        //null in case of signing in with email/ leave the default avatar
-                        if(userData.getUserPhoto() != null) {
-                            currentUserPhotoUrl = userData.getUserPhoto();
-                            Glide.with(EditProfileFragment.this).load(currentUserPhotoUrl).into(mDisplayedUserPhoto);
+                        //Update the value of the empty updatedUserData to the retrieved userData object variable
+                        updatedUserData = userData;
+
+                        //Check if there is a photo because if the user signed up with the email option and then did not update his/her profile photo
+                        // the userData.getUserPhoto() will return null and we will leave the default avatar to be the one displayed
+                        if (userData.getUserPhoto() != null) {
+
+                            Glide.with(EditProfileFragment.this).load(updatedUserData.getUserPhoto()).into(mDisplayedUserPhoto);
                         }
-
-                        //always there ISA/ put in userprofilefragment
-                        currentUserName = userData.getUserDisplayName();
-                        currentUserEmail = userData.getUserEmail();
-                        currentUserIntroduction = userData.getUserIntroduction();
-
                     }
                 }
-            });
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.e("EditProfileFragment", e.toString());
+            }
+        });
 
-        updatePhotoButton.setOnClickListener(new View.OnClickListener() {
+        //Attaching an OnClickListener to the mUpdatePhotoButton that determines the behavior that will happen
+        // when the user clicks on that button
+        mUpdatePhotoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openFileChooser();
             }
         });
 
-
-        saveProfileButton.setOnClickListener(new View.OnClickListener() {
+        //Attaching an OnClickListener to the mSaveProfileButton that determines the behavior that will happen
+        // when the user clicks on that button
+        mSaveProfileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 saveProfile();
-              }
+            }
         });
 
         return rootView;
 
     }
 
+    /**
+     * This method opens a photo picker or a chooser for the user to pick the photo that will be displayed as the profile photo
+     */
     private void openFileChooser() {
 
+        //Creating an intent object and setting its type and action, then passing it as an input argument along with
+        //the PICK_IMAGE_REQUEST code previously declared to the startActivityForResult
         Intent intent = new Intent();
-        intent.setType("image/*"); //only images will show up
+
+        //setType to image/* so that only images will show up
+        intent.setType("image/*");
+
         intent.setAction(Intent.ACTION_GET_CONTENT);
+
         startActivityForResult(intent, PICK_IMAGE_REQUEST);
     }
 
+    /**
+     * Receive the result from a previous call to startActivityForResult(Intent, int).
+     *
+     * @param requestCode int: The integer request code originally supplied to startActivityForResult(), allowing you to identify who this result came from.
+     * @param resultCode  int: The integer result code returned by the child activity through its setResult().
+     * @param data        Intent: An Intent, which can return result data to the caller.
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        //if the user actually chose an image
 
+        //if the user actually chose an image
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
                 && data != null && data.getData() != null) {
 
-            //this is the uri of the image the user has picked
-            mChosenPhotoUri = data.getData();
-            //load the image to be displayed in mdisplayedUserPhoto ImageView
-            Glide.with(this).load(mChosenPhotoUri).into(mDisplayedUserPhoto);
+            //chosenPhotoUri is the Uri of the image the user has picked
+            chosenPhotoUri = data.getData();
+
+            //Load the image to be displayed in mDisplayedUserPhoto ImageView
+            Glide.with(this).load(chosenPhotoUri).into(mDisplayedUserPhoto);
         }
     }
 
-    private void saveProfile(){
+    /**
+     * This method saves the user profile updates made by the user and stores it in the Firestore database so that the user
+     * is informed that the data is saved through a Toast message and updated in addition to closing the UpdateUserProfileActivity
+     */
+    private void saveProfile() {
 
-        String updatedName = userNameEditText.getText().toString().trim();
-        String updatedEmail = userEmailEditText.getText().toString().trim();
-        String updatedIntroduction = userIntroductionEditText.getText().toString().trim();
+//        uploadImageFile();
 
-        boolean isValidEmail = validateEmail(updatedEmail);
+        String updatedName = mUserNameEditText.getText().toString().trim();
+        String updatedIntroduction = mUserIntroductionEditText.getText().toString().trim();
 
 
         if (!TextUtils.isEmpty(updatedName)) {
             updatedUserData.setUserDisplayName(updatedName);
-        } else {
-            updatedName = currentUserName;
         }
 
-//        if (!isValidEmail) {
-//            userEmailEditText.setError("InValid Email");
-//            return;
-//        }
-
-       if (!TextUtils.isEmpty(updatedEmail)) {
-            updatedUserData.setUserEmail(updatedEmail);
-        }  else {
-           updatedEmail = currentUserEmail;
-       }
 
         if (!TextUtils.isEmpty(updatedIntroduction)) {
             updatedUserData.setUserIntroduction(updatedIntroduction);
-        } else {
-            //the default one
-            updatedIntroduction = currentUserIntroduction;
         }
 
+        if (chosenPhotoUri != null) {
+//
+//            if the user picked a file then we want to ulpoad it to the firestore database
+//            files in the storage should have unique names to avoid overriding thefiles
+//            to have a unique name for each file, we can achieve this by naming the file based on the
+//            current time in milliseconds/ this will create a file name like users uploads/4217371773371839.jpg
+
+            StorageReference mStorageReference = FirebaseStorage.getInstance().getReference("users uploads");
+
+            final StorageReference fileReference = mStorageReference.child(System.currentTimeMillis()
+                    + "." + getFileExtension(chosenPhotoUri));
+
+            fileReference.putFile(chosenPhotoUri)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                            //Get a URL to the uploaded content taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
+
+//                            String downloadUrl = "";
+
+//                            if (taskSnapshot.getMetadata() != null && taskSnapshot.getMetadata().getReference() != null) {
+//
+//                                downloadUrl = taskSnapshot.getMetadata().getReference().getDownloadUrl().toString();
+//                                updatedUserData.setUserPhoto(downloadUrl);
+//                                db.collection("Users").document(userId).set(updatedUserData, SetOptions.merge());
+//                            }
+
+                            fileReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+
+                                    downloadUrl = uri.toString();
+                                    updatedUserData.setUserPhoto(downloadUrl);
+                                     saveData();
+//                                    db.collection("Users").document(userId).set(updatedUserData, SetOptions.merge());
+
+                                }
+                            });
+                        }
+
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    // Handle unsuccessful uploads
+                    Log.e("EditProfileFragment", e.toString());
+                    e.printStackTrace();
+                }
+            });
+        } else {
+
+            saveData();
+
+        }
+
+    }
+
+    private void saveData() {
 
         db.collection("Users").document(userId).set(updatedUserData, SetOptions.merge())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     public void onSuccess(Void aVoid) {
                         //if uploading data to database is successful
-                        Log.d("EditProfileFragment", "User Data is saved Successfully");
+                        Log.d("EditProfileFragment", "User Data is updated and saved Successfully");
+
+
+                        if (getActivity() != null) {
+
+                            getActivity().setResult(RESULT_OK);
+
+                            getActivity().finish();
+                        }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -226,46 +303,38 @@ public class EditProfileFragment extends Fragment {
 
             }
         });
-//        Bundle bundle = new Bundle();
-//        bundle.putString("updatedUserName", updatedName);
-//        bundle.putString("updatedUserEmail", updatedEmail);
-//        bundle.putString("updatedUserIntro", updatedIntroduction);
-
-        UserProfileFragment userProfileFragment = new UserProfileFragment();
-//        userProfileFragment.setArguments(bundle);
-
-        if(getActivity()!= null) {
-
-            FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-            // replace the FrameLayout with new Fragment
-            fragmentTransaction.replace(R.id.fragment_container, userProfileFragment);
-            fragmentTransaction.commit(); //Save the Changes
-
-        }
-
-
     }
 
-    //this method will get the file extenision from the image uri like jpg for example
-
+    /**
+     * This method will get the file extension from the image uri chosen and convert it to something like jpg for example
+     * @param uri Uri: the image Uri chosen by the user when he/she opened the photo picker
+     * @return String: Returns the formatted image file extension
+     */
     private String getFileExtension(Uri uri) {
-        ContentResolver contentResolver = getActivity().getContentResolver();
-        MimeTypeMap mime = MimeTypeMap.getSingleton();
-        return mime.getExtensionFromMimeType(contentResolver.getType(uri));
-    }
 
-    private boolean validateEmail(String updatedEmail) {
-        boolean isValid = false;
+        ContentResolver contentResolver = null;
 
-        String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
-        CharSequence inputStr = updatedEmail;
+        if(getActivity() != null){
 
-        Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
-        Matcher matcher = pattern.matcher(inputStr);
-        if (matcher.matches()) {
-            isValid = true;
+         contentResolver = getActivity().getContentResolver();
         }
-        return isValid;
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+
+        String mimeType = null;
+
+        if(contentResolver != null) {
+
+            mimeType = contentResolver.getType(uri);
+        }
+        return mime.getExtensionFromMimeType(mimeType);
     }
 
+    /**
+     * This method uploads the chosen photo by the user to Firebase Firestorage and then if uploaded successfully to FireStorage
+     * it will be then stored in Firestore database
+     */
+    private void uploadImageFile() {
+
+
+    }
 }

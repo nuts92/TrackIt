@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:layout_marginLeft="16dp"
+    android:layout_marginTop="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginRight="16dp"
+    android:layout_marginBottom="8dp"
+    app:cardCornerRadius="20dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/card_background">
+
+        <LinearLayout
+            android:id="@+id/linear_layout_one"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="100dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/teams_icon_landscape"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/game_card_teams"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:fontFamily="@font/alfa_slab_one"
+                android:maxLines="2"
+                android:padding="8dp"
+                android:textAlignment="center"
+                android:textColor="@color/yellow_game_card"
+                android:textSize="24sp"
+                tools:text="Germany VS England" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_layout_two"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/linear_layout_one"
+            android:layout_margin="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="100dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/winner_icon_landscape"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/game_card_winner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:fontFamily="@font/alfa_slab_one"
+                android:maxLines="1"
+                android:padding="8dp"
+                android:textAlignment="center"
+                android:textColor="@color/yellow_game_card"
+                android:textSize="24sp"
+                tools:text="Germany" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_layout_three"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/linear_layout_two"
+            android:layout_margin="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="100dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/date_icon_landscape"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/game_card_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:fontFamily="@font/alfa_slab_one"
+                android:maxLines="3"
+                android:padding="8dp"
+                android:textAlignment="center"
+                android:textColor="@color/yellow_game_card"
+                android:textSize="20sp"
+                tools:text="Sat Apr 18, 06:02:014, GMT +02:00, 2020" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/swipe_icon"
+            android:layout_width="220dp"
+            android:layout_height="100dp"
+            android:layout_below="@id/linear_layout_three"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="16dp"
+            android:layout_toStartOf="@id/game_card_share_button"
+            android:layout_toLeftOf="@id/game_card_share_button"
+            android:src="@drawable/swipe_icon_landscape"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/game_card_share_button"
+            android:layout_width="250dp"
+            android:layout_height="100dp"
+            android:layout_below="@id/linear_layout_three"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            android:src="@drawable/share_button_landscape"
+            tools:ignore="ContentDescription" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
+

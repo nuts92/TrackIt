@@ -1,9 +1,17 @@
 package com.example.android.trackit.models;
 
+import android.net.Uri;
+
 import com.google.firebase.firestore.ServerTimestamp;
 
 import java.util.Date;
 
+/**
+ * This class is a Data Model Class that stores the User Data and it follows the JavaBean naming pattern which allows Firestore
+ * to automatically map values when getting and setting data. The rules that the pattern follows are that:
+ * Getter and Setter methods are defined which are strictly named to what variable they correspond to (for example: getName() provides the name field).
+ * An extra empty constructor is also defined which lets Firestore do the automatic data mapping.
+ */
 public class UserData {
 
     private String userDisplayName;
@@ -24,13 +32,6 @@ public class UserData {
         this.userDisplayName = userDisplayName;
         this.userEmail = userEmail;
         this.userPhoto = userPhoto;
-    }
-
-    public UserData(String userDisplayName, String userEmail, String userPhoto, String userIntroduction) {
-        this.userDisplayName = userDisplayName;
-        this.userEmail = userEmail;
-        this.userPhoto = userPhoto;
-        this.userIntroduction = userIntroduction;
     }
 
     public String getUserDisplayName() {

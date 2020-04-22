@@ -1,88 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".EditProfileFragment"
-    android:orientation="vertical"
+    android:background="@color/yellow_introduction"
     android:gravity="center_horizontal"
-    android:layout_margin="16dp">
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".EditProfileFragment">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/edit_profile_fragment_title"
-                android:textSize="28sp"
-                android:textColor="@color/colorPrimary"
-                android:layout_margin="16dp"
-                android:fontFamily="@font/alfa_slab_one"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:fontFamily="@font/alfa_slab_one"
+        android:text="@string/edit_profile_fragment_title"
+        android:textAllCaps="true"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="22sp" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/edit_user_profile_photo"
-                    android:layout_width="130dp"
-                    android:layout_height="130dp"
-                    app:civ_border_color="@color/colorPrimary"
-                    app:civ_border_width="3dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:src="@drawable/default_avatar" />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/edit_user_profile_photo"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:src="@drawable/default_avatar"
+            app:civ_border_color="@color/colorPrimary"
+            app:civ_border_width="3dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/edit_user_photo_picker_button"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_marginEnd="84dp"
-                    android:layout_marginRight="84dp"
-                    android:src="@drawable/edit_pen_icon"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+        <ImageView
+            android:id="@+id/edit_user_photo_picker_button"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="84dp"
+            android:layout_marginRight="84dp"
+            android:src="@drawable/edit_pen_icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:ignore="ContentDescription" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <EditText
-                android:id="@+id/edit_name_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textCapWords"
-                android:hint="@string/edit_profile_fragment_name_hint"
-                android:layout_margin="16dp"/>
+    <EditText
+        android:id="@+id/edit_name_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:hint="@string/edit_profile_fragment_name_hint"
+        android:inputType="textCapWords"
+        tools:ignore="Autofill" />
 
+    <EditText
+        android:id="@+id/edit_intro_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:hint="@string/edit_profile_fragment_introduction_hint"
+        android:inputType="text"
+        android:maxLines="3"
+        tools:ignore="Autofill" />
 
-            <EditText
-                android:id="@+id/edit_email_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
-                android:hint="@string/edit_profile_fragment_email_hint"
-                android:layout_margin="16dp"/>
+    <Button
+        android:id="@+id/save_profile_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@drawable/gradient_button_background"
+        android:fontFamily="@font/alfa_slab_one"
+        android:text="@string/edit_profile_fragment_save_button"
+        android:textColor="@color/white"
+        android:textSize="24sp" />
 
-
-            <EditText
-                android:id="@+id/edit_intro_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textShortMessage"
-                android:maxLines="3"
-                android:hint="@string/edit_profile_fragment_introduction_hint"
-                android:layout_margin="16dp"/>
-
-            <Button
-                android:id="@+id/save_profile_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/edit_profile_fragment_save_button"
-                android:layout_margin="16dp"
-                android:background="@color/colorPrimary"
-                android:textSize="24sp"
-                android:textColor="@color/white"
-                android:fontFamily="@font/alfa_slab_one"/>
-
-        </LinearLayout>
+</LinearLayout>
 
