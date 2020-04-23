@@ -81,7 +81,7 @@ Here the user can track the goals and fouls of both the home team and the away t
 
 The game counter also take into consideration configuration changes like rotating the device to the landscape mode so the scores and fouls that the user has entered won't be lost.
 
-<img src="https://i.imgur.com/g5JP54B.png" width="350> <img src="https://i.imgur.com/up4j2mU.png" width="300"> 
+<img src="https://i.imgur.com/g5JP54B.png" width="300> <img src="https://i.imgur.com/up4j2mU.png" width="300"> 
 
  
  
