@@ -19,6 +19,8 @@ the TrackIt App is opened.It is a simple constant screen that is displayed for a
 
 ### The Splash Screen displays as below:
 
+<img src="https://media.giphy.com/media/Woop2FQ4k7DQfY2Ekj/giphy.gif" width="400">
+
 
 ### The Introduction Wizard (How to use TrackIt Guide)
 
