@@ -61,7 +61,7 @@ However, if the user chooses to signs up with the Email Option and the user was 
  
  ### FireStore Database Users Collection Screenshot:
  
-  <img src="https://i.imgur.com/wrbzccs.png">  <img src="https://i.imgur.com/MqWLlx4.png">
+  <img src="https://i.imgur.com/wrbzccs.png"> 
   
   ### Starting A New Game Process:
   
@@ -77,10 +77,9 @@ Here the user can track the goals and fouls of both the home team and the away t
 
  ### Soccer Counter Screen Game Results:
 
-<img src="https://i.imgur.com/tGOqVd2.png" width="300"> <img src="https://i.imgur.com/nXWJUM6.png" width="300"> <img src="https://i.imgur.com/Wpr62Kq.png" width="300"><img src="https://i.imgur.com/OgfXE0X.png" width="300"> 
+<img src="https://media.giphy.com/media/UQ0ttG9W6AYq1Wk60C/giphy.gif" width="300"> <img src="https://i.imgur.com/tGOqVd2.png" width="300"> <img src="https://i.imgur.com/nXWJUM6.png" width="300"> <img src="https://i.imgur.com/Wpr62Kq.png" width="300"><img src="https://i.imgur.com/OgfXE0X.png" width="300"> 
+
  
- ### Firebase Authentication Screenshot:
- <img src="https://i.imgur.com/BWknrKQ.png" width="300"> <img src="https://i.imgur.com/ZYmQ4Us.png" width="300">
  
 
 
