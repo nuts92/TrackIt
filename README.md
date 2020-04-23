@@ -77,10 +77,11 @@ Here the user can track the goals and fouls of both the home team and the away t
 
  ### Soccer Counter Screen Game Results:
 
-<img src="https://media.giphy.com/media/UQ0ttG9W6AYq1Wk60C/giphy.gif" width="300"> <img src="https://media.giphy.com/media/dWkmz9xXymxZf8KfAJ/giphy.gif" width="300"> <img src="https://i.imgur.com/nXWJUM6.png" width="300"> <img src="https://i.imgur.com/Wpr62Kq.png" width="300"><img src="https://media.giphy.com/media/f7NCKuYhHZkWemIAXK/giphy.gif" width="300"> 
+<img src="https://media.giphy.com/media/TJfSUxPjeLuwyvpJI6/giphy.gif" width="300"> <img src="https://media.giphy.com/media/dWkmz9xXymxZf8KfAJ/giphy.gif" width="300"> <img src="https://media.giphy.com/media/hScfE2EAIxjinPOV59/giphy.gif" width="300"> <img src="https://media.giphy.com/media/f7NCKuYhHZkWemIAXK/giphy.gif" width="300"> 
 
 The game counter also take into consideration configuration changes like rotating the device to the landscape mode so the scores and fouls that the user has entered won't be lost.
 
+<img src="https://i.imgur.com/up4j2mU.png" width="300"> <img src="https://i.imgur.com/g5JP54B.png" width="300">
 
  
  
