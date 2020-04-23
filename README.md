@@ -19,7 +19,7 @@ the TrackIt App is opened.It is a simple constant screen that is displayed for a
 
 ### The Splash Screen displays as below:
 
-<img src="https://media.giphy.com/media/Woop2FQ4k7DQfY2Ekj/giphy.gif" width="400">
+<img src="https://media.giphy.com/media/Woop2FQ4k7DQfY2Ekj/giphy.gif" width="300">
 
 
 ### The Introduction Wizard (How to use TrackIt Guide)
@@ -69,9 +69,7 @@ Now the user has signed up successfully and logged in to the MainActivity. The M
 
   ### Starting A New Game Process Screenshots:
   
-   <img src="https://media.giphy.com/media/eH9f28djsTny4Rvf9U/giphy.gif" width="300"> 
-   <img src="https://i.imgur.com/4TXRdGH.png" width="300">
-   <img src="https://i.imgur.com/5rLPGzH.png" width="300"> 
+   <img src="https://media.giphy.com/media/eH9f28djsTny4Rvf9U/giphy.gif" width="300"> <img src="https://i.imgur.com/4TXRdGH.png" width="300"> <img src="https://i.imgur.com/5rLPGzH.png" width="300"> 
    
  ### Soccer Counter Screen:
  
