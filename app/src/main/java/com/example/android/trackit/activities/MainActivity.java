@@ -212,8 +212,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.e("SignUpActivity", e.toString());
 
+                Log.e("SignUpActivity", e.toString());
             }
         });
     }
