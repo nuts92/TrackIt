@@ -59,12 +59,7 @@ However, if the user chooses to signs up with the Email Option and the user was 
  
  ### FireStore Database Screenshot:
  
-  <img src=" https://i.imgur.com/wrbzccs.png"> 
-  
-  and
-  
- 
- <img src="https://i.imgur.com/MqWLlx4.png">
+  <img src="https://i.imgur.com/wrbzccs.png" width="400>  <img src="https://i.imgur.com/MqWLlx4.png" width="400>
  
  ### Firebase Authentication Screenshot:
  <img src="https://i.imgur.com/BWknrKQ.png" width="300"> <img src="https://i.imgur.com/ZYmQ4Us.png" width="300">
