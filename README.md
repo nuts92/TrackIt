@@ -58,7 +58,9 @@ However, if the user chooses to signs up with the Email Option and the user was 
  uUser Id and stored inside a collection called “Users” as displayed in the screenshot below.
  
  ### FireStore Database Screenshot:
-  <img src=" https://i.imgur.com/wrbzccs.png" width="400> <img src="https://i.imgur.com/MqWLlx4.png" width="400>
+  <img src=" https://i.imgur.com/wrbzccs.png"> 
+ 
+ <img src="https://i.imgur.com/MqWLlx4.png">
  
  ### Firebase Authentication Screenshot:
  <img src="https://i.imgur.com/BWknrKQ.png" width="300"> <img src="https://i.imgur.com/ZYmQ4Us.png" width="300">
