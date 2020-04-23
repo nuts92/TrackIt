@@ -74,11 +74,9 @@ Now the user has signed up successfully and logged in to the MainActivity. The M
  
 Here the user can track the goals and fouls of both the home team and the away team in real time. When the user is done, he/she can choose to save the game result. When the user saves the game result, a popup card shows up with an animation based on the game result and a call to action that prompts the user to start a new game. Also, A toast message is displayed showing that the game is saved. The goal and foul buttons are disabled, the save game button disappears and the reset button is replaced with start a new game button.
 
- ### Soccer Counter Screen Game Resulst:
+ ### Soccer Counter Screen Game Results:
 
-<img src="https://i.imgur.com/tGOqVd2.png" width="300"> <img src="https://i.imgur.com/OgfXE0X.png" width="300"> 
-
- 
+<img src="https://i.imgur.com/tGOqVd2.png" width="300"> <img src="https://i.imgur.com/nXWJUM6.png" width="300"> <img src="https://i.imgur.com/Wpr62Kq.png" width="300"><img src="https://i.imgur.com/OgfXE0X.png" width="300"> 
  
  ### Firebase Authentication Screenshot:
  <img src="https://i.imgur.com/BWknrKQ.png" width="300"> <img src="https://i.imgur.com/ZYmQ4Us.png" width="300">
