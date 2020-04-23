@@ -38,7 +38,7 @@ The TrackIt App Sign Up Process is built using the FirebaseUI Authentication tha
 <img src="https://media.giphy.com/media/Wt0CfQT8j2X9ISvbJE/giphy.gif" width="300">
 
 ### Signing Up using Google:
-If the user chooses to sign up with the Google Option, the process will be as follows, first he will she 
+If the user chooses to sign up with the Google Option,authentication process will ask the user to  sign up with his/her Google Account and enter his/her google email and password. Also, there are additional useful features in case the user forgot the password, want to sign up with another Goggle Account or create a new Google Account.
 
 ### Google Sign Up Screenshots:
 
@@ -58,7 +58,7 @@ However, if the user chooses to signs up with the Email Option and the user was 
  uUser Id and stored inside a collection called “Users” as displayed in the screenshot below.
  
  ### FireStore Database Screenshot:
-  <img src=" https://i.imgur.com/wrbzccs.png"> <img src="https://i.imgur.com/MqWLlx4.png">
+  <img src=" https://i.imgur.com/wrbzccs.png" width="400> <img src="https://i.imgur.com/MqWLlx4.png" width="400>
  
  ### Firebase Authentication Screenshot:
  <img src="https://i.imgur.com/BWknrKQ.png" width="300"> <img src="https://i.imgur.com/ZYmQ4Us.png" width="300">
