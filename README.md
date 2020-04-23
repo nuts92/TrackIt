@@ -27,12 +27,18 @@ five simple steps with the images of the App’s Functionalities attached in the
 the user will be then redirected to a SignUp Screen where he/she can sign up either by Google or Email as Sign In Providers. The user
 can also navigate back to the introduction wizard guide if he/she wants to check it out again frtom within the App's Navigation Drawer.
 
-### Introduction Wizard Screenshot:
+### Introduction Wizard Screenshots:
 
+<img src="https://i.imgur.com/1X5NR71.png" width="300"> <img src="https://i.imgur.com/1LnNPYG.png" width="300"> <img src="https://i.imgur.com/pFwkRdQ.png" width="300"> <img src="https://i.imgur.com/UeOb72z.png" width="300"> <img src="https://i.imgur.com/q5DWIWH.png" width="300"> 
 ### TrackIt Sign Up Process:
 
-The TrackIt App Sign Up Process is built using the FirebaseUI Authentication which provides the user with two Sign-In Providers’ Options
-which are Google and Email. If the user chooses to sign up with the Google Option, the process will be as follows, first he will she 
+The TrackIt App Sign Up Process is built using the FirebaseUI Authentication which provides the user with two Sign-In Providers’ Options which are Google and Email. 
+
+###TrackIt Sign Up:
+
+<img src="https://media.giphy.com/media/Wt0CfQT8j2X9ISvbJE/giphy.gif" width="300">
+
+If the user chooses to sign up with the Google Option, the process will be as follows, first he will she 
 
 ###Firebase Authentication Screenshot:
 
