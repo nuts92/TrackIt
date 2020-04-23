@@ -37,7 +37,7 @@ The TrackIt App Sign Up Process is built using the FirebaseUI Authentication tha
 
 ### TrackIt Sign Up displays as below:
 
-<img src="https://media.giphy.com/media/Wt0CfQT8j2X9ISvbJE/giphy.gif" width="400">
+<img src="https://media.giphy.com/media/Wt0CfQT8j2X9ISvbJE/giphy.gif" width="300">
 
 ### Signing Up using Google:
 If the user chooses to sign up with the Google Option,authentication process will ask the user to  sign up with his/her Google Account and enter his/her google email and password. Also, there are additional useful features in case the user forgot the password, want to sign up with another Goggle Account or create a new Google Account.
@@ -69,7 +69,7 @@ Now the user has signed up successfully and logged in to the MainActivity. The M
 
   ### Starting A New Game Process Screenshots:
   
-   <img src="https://media.giphy.com/media/eH9f28djsTny4Rvf9U/giphy.gif" width="300"> <img src="https://i.imgur.com/4TXRdGH.png" width="300"> <img src="https://i.imgur.com/5rLPGzH.png" width="300"> 
+   <img src="https://media.giphy.com/media/eH9f28djsTny4Rvf9U/giphy.gif" width="300"> <img src="https://media.giphy.com/media/JsUuAiN2kw1DLY8GvY/giphy.gif" width="300"> <img src="https://media.giphy.com/media/ZZMg0iDeTt6MJCncVj/giphy.gif" width="300"> <img src="https://i.imgur.com/4TXRdGH.png" width="300"> <img src="https://i.imgur.com/5rLPGzH.png" width="300"> 
    
  ### Soccer Counter Screen:
  
