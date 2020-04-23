@@ -61,6 +61,8 @@ However, if the user chooses to signs up with the Email Option and the user was 
  
   <img src=" https://i.imgur.com/wrbzccs.png"> 
   
+  and
+  
  
  <img src="https://i.imgur.com/MqWLlx4.png">
  
