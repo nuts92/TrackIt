@@ -69,7 +69,7 @@ Now the user has signed up successfully and logged in to the MainActivity. The M
 
   ### Starting A New Game Process Screenshots:
   
-   <img src="https://media.giphy.com/media/eH9f28djsTny4Rvf9U/giphy.gif" width="300"> <img src="https://media.giphy.com/media/JsUuAiN2kw1DLY8GvY/giphy.gif" width="300"> <img src="https://media.giphy.com/media/ZZMg0iDeTt6MJCncVj/giphy.gif" width="300"> <img src="https://i.imgur.com/4TXRdGH.png" width="300"> <img src="https://i.imgur.com/5rLPGzH.png" width="300"> 
+<img src="https://media.giphy.com/media/eH9f28djsTny4Rvf9U/giphy.gif" width="300"> <img src="https://media.giphy.com/media/JsUuAiN2kw1DLY8GvY/giphy.gif" width="300"> <img src="https://media.giphy.com/media/ZZMg0iDeTt6MJCncVj/giphy.gif" width="300"> 
    
  ### Soccer Counter Screen:
  
@@ -77,7 +77,10 @@ Here the user can track the goals and fouls of both the home team and the away t
 
  ### Soccer Counter Screen Game Results:
 
-<img src="https://media.giphy.com/media/UQ0ttG9W6AYq1Wk60C/giphy.gif" width="300"> <img src="https://i.imgur.com/tGOqVd2.png" width="300"> <img src="https://i.imgur.com/nXWJUM6.png" width="300"> <img src="https://i.imgur.com/Wpr62Kq.png" width="300"><img src="https://i.imgur.com/OgfXE0X.png" width="300"> 
+<img src="https://media.giphy.com/media/UQ0ttG9W6AYq1Wk60C/giphy.gif" width="300"> <img src="https://media.giphy.com/media/dWkmz9xXymxZf8KfAJ/giphy.gif" width="300"> <img src="https://i.imgur.com/nXWJUM6.png" width="300"> <img src="https://i.imgur.com/Wpr62Kq.png" width="300"><img src="https://media.giphy.com/media/f7NCKuYhHZkWemIAXK/giphy.gif" width="300"> 
+
+The game counter also take into consideration configuration changes like rotating the device to the landscape mode so the scores and fouls that the user has entered won't be lost.
+
 
  
  
