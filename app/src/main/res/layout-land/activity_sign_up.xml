@@ -8,7 +8,7 @@
     android:gravity="center_horizontal"
     android:orientation="horizontal"
     android:padding="8dp"
-    tools:context=".SignUpActivity">
+    tools:context=".activities.SignUpActivity">
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/welcome_lottie_animation"
@@ -42,6 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:fontFamily="@font/alfa_slab_one"
+            android:gravity="center"
             android:text="@string/sign_up_welcome_title"
             android:textAlignment="center"
             android:textColor="@color/white"
@@ -53,6 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
             android:fontFamily="@font/alfa_slab_one"
+            android:gravity="center"
             android:text="@string/sign_up_slogan_title"
             android:textAlignment="center"
             android:textColor="@color/yellow_introduction"

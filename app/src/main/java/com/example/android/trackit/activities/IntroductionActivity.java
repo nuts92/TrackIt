@@ -1,4 +1,4 @@
-package com.example.android.trackit;
+package com.example.android.trackit.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.android.trackit.R;
 import com.example.android.trackit.introduction_fragments.IntroductionFragmentFive;
 import com.example.android.trackit.introduction_fragments.IntroductionFragmentFour;
 import com.example.android.trackit.introduction_fragments.IntroductionFragmentOne;
@@ -26,7 +27,7 @@ import com.google.android.material.tabs.TabLayout;
  */
 public class IntroductionActivity extends AppCompatActivity {
 
-     //Declaring and initialing a constant that represents the number of pages (wizard steps) to be displayed.
+    //Declaring and initialing a constant that represents the number of pages (wizard steps) to be displayed.
     private static final int NUM_PAGES = 5;
 
     //Declaring the ViewPager widget, which handles animation and allows swiping horizontally to access previous
@@ -66,7 +67,7 @@ public class IntroductionActivity extends AppCompatActivity {
 
     /**
      * finishBoarding() method saves the state of whether the user has finished the introduction wizard onBoarding or not
-     * and then redirects the user to the MainActivity.
+     * and then redirects the user to the SignUpActivity.
      */
     private void finishBoarding() {
 
@@ -76,10 +77,10 @@ public class IntroductionActivity extends AppCompatActivity {
 
         //Save data changes in SharedPreferences by calling edit() method of SharedPreferences class which returns Editor class object.
         //call putBoolean method to save a boolean value in a preference editor and Set onBoardingComplete to true
-        SharedPreferences.Editor editor =sharedPreferences.edit();
+        SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean("onBoardingComplete", true).apply();
 
-        // Open the MainActivity by passing intent as an input argument to startActivity method
+        // Open the SignUpActivity by passing intent as an input argument to startActivity method
         Intent intent = new Intent(IntroductionActivity.this, SignUpActivity.class);
         startActivity(intent);
 
@@ -96,8 +97,10 @@ public class IntroductionActivity extends AppCompatActivity {
         // If the user is currently looking at the first step, allow the system to handle the
         // Back button. This calls finish() on this activity and pops the back stack.
         if (mViewPager.getCurrentItem() == 0) {
+
             super.onBackPressed();
         } else {
+
             // Otherwise, select the previous step.
             mViewPager.setCurrentItem(mViewPager.getCurrentItem() - 1);
         }
@@ -114,7 +117,8 @@ public class IntroductionActivity extends AppCompatActivity {
         }
 
         /**
-         *This method gets the fragment at the specified position and returns it to be displayed
+         * This method gets the fragment at the specified position and returns it to be displayed
+         *
          * @param position int: the position of the Fragment in the pager.
          * @return Fragment: returns the Fragment associated with a specified position.
          */
@@ -139,6 +143,7 @@ public class IntroductionActivity extends AppCompatActivity {
 
         /**
          * This method counts the number of views/fragments that are in the data set represented by this Adapter.
+         *
          * @return int the number of views available, in this case 5 Fragment objects
          */
         @Override

@@ -1,4 +1,4 @@
-package com.example.android.trackit;
+package com.example.android.trackit.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -6,9 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.android.trackit.R;
+
 /**
  * This class displays the EditProfile Screen where the user can update his/her profile by either
- * changing the name, self introduction or both.
+ * changing the profile photo, name, self introduction or all of them.
  */
 public class UpdateUserProfileActivity extends AppCompatActivity {
 
@@ -19,6 +21,7 @@ public class UpdateUserProfileActivity extends AppCompatActivity {
 
         //set the title of the toolbar to Update Profile
         if (getSupportActionBar() != null) {
+
             getSupportActionBar().setTitle("Update Profile");
         }
     }
@@ -31,7 +34,8 @@ public class UpdateUserProfileActivity extends AppCompatActivity {
      */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        //Let's the user tap the home/up button to go back. If the item that was selected was the home/Up button
+
+        //Let the user tap the home/up button to go back. If the item that was selected was the home/Up button
         // then finish this activity, otherwise allow normal menu processing to proceed
         if (item.getItemId() == android.R.id.home) {
             finish();

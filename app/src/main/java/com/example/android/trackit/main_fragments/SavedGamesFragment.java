@@ -1,4 +1,4 @@
-package com.example.android.trackit;
+package com.example.android.trackit.main_fragments;
 
 
 import android.content.Intent;
@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.android.trackit.R;
 import com.example.android.trackit.adapters.CardAdapter;
 import com.example.android.trackit.models.SavedGame;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -89,13 +90,18 @@ public class SavedGamesFragment extends Fragment {
         return rootView;
     }
 
+    /**
+     * This method sets up the recyclerView in addition to constructing the query that will display data from Firestore database, initializing the
+     * adapter then attaching it to the recyclerView, and setting an OnItemClickListenr on the adapter so that it listens to the user's click on
+     * the share button and share the message to other Apps.
+     */
     private void setUpRecyclerView() {
 
         //Declaring and initializing a query object that displays the data from Firestore ordered by timestamp which means
-        // the saved game with the latest date is displayed first
+        //the saved game with the latest date is displayed first
         Query query = gamesCollectionReference.orderBy("timestamp", Query.Direction.DESCENDING);
 
-        //configure the adapter by building FirestoreRecyclerOptions,  Configure recycler adapter options:
+        //configure the adapter by building FirestoreRecyclerOptions, Configure recycler adapter options:
         // query is the Query object defined above.
         // SavedGame.class instructs the adapter to convert each DocumentSnapshot to a SavedGame object
         FirestoreRecyclerOptions<SavedGame> options = new FirestoreRecyclerOptions.Builder<SavedGame>()
@@ -116,6 +122,7 @@ public class SavedGamesFragment extends Fragment {
         query.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+
                 if (e != null) {
                     Log.e("SavedGamesFragment", e.toString());
                     return;
@@ -144,7 +151,7 @@ public class SavedGamesFragment extends Fragment {
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
 
                 //when the user swipes the card to the left, the item in this specific position will be deleted and
-                // a toast message will be displayed that the deletion process is successful
+                //a toast message will be displayed that the deletion process is successful
                 cardAdapter.deleteItem(viewHolder.getAdapterPosition());
 
                 Toast.makeText(getActivity(), "Game is successfully deleted", Toast.LENGTH_SHORT).show();
@@ -186,7 +193,7 @@ public class SavedGamesFragment extends Fragment {
                 }
 
                 //Use Android Sharesheet to send text content outside the app and/or directly to another user via email or social networking.
-                // create an intent and set its action to Intent.ACTION_SEND.
+                //Create an intent and set its action to Intent.ACTION_SEND.
                 Intent sendIntent = new Intent();
 
                 sendIntent.setAction(Intent.ACTION_SEND);

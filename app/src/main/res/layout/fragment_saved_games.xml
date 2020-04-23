@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/other_gradient"
-    tools:context=".SavedGamesFragment">
+    tools:context=".main_fragments.SavedGamesFragment">
 
     <TextView
         android:id="@+id/emptyInfoTextView"

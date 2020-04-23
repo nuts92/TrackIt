@@ -2,7 +2,7 @@
 <resources>
 
     <!-- This Theme make the status bar transparent but only on API level 21 or higher -->
-    <style name="AppTheme.NoActionBar">
+    <style name="NoActionBarTheme" parent="AppTheme">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>

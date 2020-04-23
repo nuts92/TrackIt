@@ -1,4 +1,4 @@
-package com.example.android.trackit;
+package com.example.android.trackit.main_fragments;
 
 
 import android.app.Dialog;
@@ -21,6 +21,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.example.android.trackit.R;
+import com.example.android.trackit.activities.MainActivity;
 import com.example.android.trackit.models.SavedGame;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -118,8 +120,9 @@ public class GameCounterFragment extends Fragment {
 
         //Check if there is a bundle passed from the UpdateTeamsFragment if the user chose to update Teams'Names
         if (getArguments() != null) {
-            //If there are updated names passed then set these updated names to the TextViews otherwise Leave the TextViews
-            //to default (Home, Away)
+
+            //If there are updated names passed then set these updated names to the TextViews, Otherwise leave the TextViews
+            //to the default (Home, Away)
             mUpdatedHomeName = getArguments().getString("updated home name");
 
             mUpdatedAwayName = getArguments().getString("updated away name");
@@ -134,11 +137,11 @@ public class GameCounterFragment extends Fragment {
         mHomeGoalButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 //Increase the score for Home Team by 1 point each click and then display it
                 homeScore = homeScore + 1;
 
                 displayHomeScore(homeScore);
-
             }
         });
 
@@ -147,6 +150,7 @@ public class GameCounterFragment extends Fragment {
         mAwayGoalButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 //Increase the score for Away Team by 1 point each button click and then display it
                 awayScore = awayScore + 1;
 
@@ -159,6 +163,7 @@ public class GameCounterFragment extends Fragment {
         mHomeFoulButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 //Increase the fouls for Home Team by 1 each click and then display them
                 homeFouls = homeFouls + 1;
 
@@ -171,6 +176,7 @@ public class GameCounterFragment extends Fragment {
         mAwayFoulButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 //Increase the fouls for Away Team by 1 each click and then display them
                 awayFouls = awayFouls + 1;
 
@@ -201,10 +207,6 @@ public class GameCounterFragment extends Fragment {
                 displayHomeFouls(homeFouls);
 
                 displayAwayFouls(awayFouls);
-
-                //Reset also the teams' names to the default names
-                mHomeNameView.setText(R.string.default_home_name);
-                mAwayNameView.setText(R.string.default_away_name);
             }
         });
 
@@ -213,6 +215,7 @@ public class GameCounterFragment extends Fragment {
         mSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 saveGame();
             }
         });
@@ -221,7 +224,7 @@ public class GameCounterFragment extends Fragment {
     }
 
     /**
-     * This method determines the winner and final names of the teams so that the game results can be saved in Firestore Database.
+     * This method determines the winner and final names of the teams then save these values and the game results in Firestore Database.
      */
     private void saveGame() {
 
@@ -277,7 +280,6 @@ public class GameCounterFragment extends Fragment {
 
         //Save the Game Results in Firestore Database
         saveResultInFirestore();
-
     }
 
     /**
@@ -285,7 +287,6 @@ public class GameCounterFragment extends Fragment {
      * the user, and the scores and fouls of each team. In addition, it disables all buttons after the game is saved and just displays
      * Start A New Game Button.
      */
-
     private void saveResultInFirestore() {
 
         //Decalring and initializing an instance of Firestore database
@@ -313,6 +314,7 @@ public class GameCounterFragment extends Fragment {
         gamesCollectionReference.add(savedGame).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
             public void onSuccess(DocumentReference documentReference) {
+
                 //if game is saved successfully, show a dialog that displays the result and a toast message that the game is saved
                 //In addition, disable the goal and foul buttons, hide the mSaveButton, and change the text of resetButton to Start A New Game.
                 showAnimationDialog();
@@ -353,7 +355,7 @@ public class GameCounterFragment extends Fragment {
     }
 
     /**
-     * This method Displays a dialog that shows the game result along with a call to action to start a new game.
+     * This method displays a dialog that shows the Game Result along with a Text Call to Action to start a new game.
      */
     private void showAnimationDialog() {
 
@@ -366,10 +368,12 @@ public class GameCounterFragment extends Fragment {
 
             //Declaring and initializing the resultAnimation, resultText, and closeResultButton object variables
             LottieAnimationView resultAnimation = dialog.findViewById(R.id.result_lottie_animation);
+
             TextView resultText = dialog.findViewById(R.id.result_text);
+
             ImageView closeResultButton = dialog.findViewById(R.id.result_card_close_button);
 
-            //Determining what to display in the PopUp Dialog based on the game result
+            //Determining what to display in the PopUp Dialog based on the Game Result
             if (homeScore > awayScore) {
 
                 resultAnimation.setAnimation(R.raw.win);
@@ -441,7 +445,7 @@ public class GameCounterFragment extends Fragment {
     /**
      * This method displays the given fouls for the Home Team.
      *
-     * @param fouls int: is the Home Team Fouls Number
+     * @param fouls int: is the Home Team Fouls' Number
      */
     private void displayHomeFouls(int fouls) {
 
@@ -453,7 +457,7 @@ public class GameCounterFragment extends Fragment {
     /**
      * This method displays the given fouls for the Away Team.
      *
-     * @param fouls int: is the Away Team Fouls Number
+     * @param fouls int: is the Away Team Fouls' Number
      */
     private void displayAwayFouls(int fouls) {
 
@@ -467,7 +471,6 @@ public class GameCounterFragment extends Fragment {
      * It can be used to do final initialization once these pieces are in place, such as retrieving views or restoring state.
      *
      * @param savedInstanceState Bundle: If the fragment is being re-created from a previous saved state, this is the state.
-     * This value may be null.
      */
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -516,5 +519,4 @@ public class GameCounterFragment extends Fragment {
 
         outState.putInt("away team fouls", awayFouls);
     }
-
 }

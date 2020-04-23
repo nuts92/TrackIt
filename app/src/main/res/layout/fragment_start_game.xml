@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_trackit"
     android:orientation="vertical"
-    tools:context=".StartGameFragment">
+    tools:context=".main_fragments.StartGameFragment">
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/start_game_lottie_animation"

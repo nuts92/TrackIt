@@ -1,16 +1,14 @@
-package com.example.android.trackit;
+package com.example.android.trackit.activities;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
+import com.example.android.trackit.R;
 import com.example.android.trackit.models.UserData;
 import com.firebase.ui.auth.AuthMethodPickerLayout;
 import com.firebase.ui.auth.AuthUI;
@@ -20,11 +18,8 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.util.Arrays;
 
@@ -42,14 +37,16 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        //Declaring and initializing  an instance of FirebaseAuth
+        //Declaring and initializing an instance of FirebaseAuth
         FirebaseAuth auth = FirebaseAuth.getInstance();
 
         // Check if user is already signed in (non-null) from a previous session and update UI accordingly.
         FirebaseUser currentUser = auth.getCurrentUser();
+
         if (currentUser != null) {
             // already signed in
             updateUI(currentUser);
+
         } else {
             //the user isn't signed in then start the authentication process and the FirebaseUI sign-in flow process
             authenticateUser();
@@ -62,7 +59,7 @@ public class SignUpActivity extends AppCompatActivity {
      */
     private void authenticateUser() {
 
-        // providing a custom layout XML resource to be used instead of the default one and configuring at least one provider button Id.
+        //Providing a custom layout XML resource to be used instead of the default one and configuring at least one provider button Id.
         final AuthMethodPickerLayout customLayout = new AuthMethodPickerLayout
                 .Builder(R.layout.activity_sign_up)
                 .setGoogleButtonId(R.id.google_log_in_button)
@@ -97,14 +94,14 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        // RC_SIGN_IN is the request code that was passed into startActivityForResult() when starting the sign in flow.
+        //RC_SIGN_IN is the request code that was passed into startActivityForResult() when starting the sign in flow.
         if (requestCode == RC_SIGN_IN) {
 
             IdpResponse response = IdpResponse.fromResultIntent(data);
 
             if (resultCode == RESULT_OK) {
 
-                // The user is successfully signed in
+                //The user is successfully signed in
                 Intent startIntent = new Intent(this, MainActivity.class);
                 startActivity(startIntent);
                 Toast.makeText(this, "You are Logged In", Toast.LENGTH_SHORT).show();
@@ -113,7 +110,7 @@ public class SignUpActivity extends AppCompatActivity {
             } else {
 
                 if (response == null) {
-                    // The User pressed the back button
+                    //The User pressed the back button
                     Toast.makeText(this, "Logging In is Cancelled", Toast.LENGTH_SHORT).show();
                     finish();
                     return;
@@ -135,8 +132,8 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     /**
-     * This method updates the UI by redirecting the user to the MainActivity and displaying a welcome toast message
-     * in case the current user is  not null and already signed in from a previous session
+     * This method updates the UI by redirecting the user to the MainActivity and displaying a Welcome Toast Message
+     * in case the current user isn't null and already signed in from a previous session
      *
      * @param currentUser the currently signed in user from a previous session
      */
@@ -147,23 +144,29 @@ public class SignUpActivity extends AppCompatActivity {
 
         //Getting the user data from the Firestore database where the user data is stored in a document named by the userId in a collection called "Users"
         //If the user has signed in before, then a document will be already created in database by createUserProfile method in the MainActivity
-        db.collection("Users").document(currentUser.getUid()).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+        db.collection("Users").document(currentUser.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
-            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
-
-                if(e != null){
-                    Log.e("SignUpActivity", e.toString());
-                    return;
-                }
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
 
                 if (documentSnapshot != null) {
+
+                    //Retrieve the user data by creating a userData object from the documentSnapshot which is basically a snapshot of the user document
                     UserData userData = documentSnapshot.toObject(UserData.class);
+
                     if (userData != null) {
-                        //Declaring and initializing a userName variable that will be used in creating a welcome toast message
+
+                        //Declaring and initializing a userName variable that will be used in creating a Welcome Toast Message
                         String userName = userData.getUserDisplayName();
+
                         Toast.makeText(SignUpActivity.this, userName + "! Are You Ready For a New Game?", Toast.LENGTH_LONG).show();
                     }
                 }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+                Log.e("SignUpActivity", e.toString());
             }
         });
 

@@ -25,7 +25,7 @@ public class CardAdapter extends FirestoreRecyclerAdapter<SavedGame, CardAdapter
     private OnItemClickListener mListener;
 
     /**
-     * This constructor creates a new RecyclerView adapter that listens to a Firestore Query.
+     * This constructor creates a new RecyclerView Adapter that listens to a Firestore Query.
      *
      * @param options FirestoreRecyclerOptions: for configuration options.
      */
@@ -52,7 +52,6 @@ public class CardAdapter extends FirestoreRecyclerAdapter<SavedGame, CardAdapter
         holder.date.setText(model.getTimestamp().toString());
 
         holder.winner.setText(model.getWinner());
-
     }
 
     /**
@@ -89,7 +88,7 @@ public class CardAdapter extends FirestoreRecyclerAdapter<SavedGame, CardAdapter
      */
     class CardHolder extends RecyclerView.ViewHolder {
 
-        //Declaring all object variables
+        //Declaring all Object Variables
         TextView teams;
 
         TextView winner;
@@ -134,7 +133,7 @@ public class CardAdapter extends FirestoreRecyclerAdapter<SavedGame, CardAdapter
 
     /**
      * This interface will be used to send data from the adapter to the underlying activity or fragment that implements this interface
-     * It will be implemented in the SavedGamesFragment that displays the Saved games' cards.
+     * It will be implemented in the SavedGamesFragment that displays the Saved Games' Cards.
      */
     public interface OnItemClickListener {
 

@@ -1,8 +1,7 @@
-package com.example.android.trackit;
+package com.example.android.trackit.main_fragments;
 
 
 import android.content.ContentResolver;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,7 +9,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.text.TextUtils;
 import android.util.Log;
@@ -24,8 +22,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.android.trackit.R;
 import com.example.android.trackit.models.UserData;
-import com.firebase.ui.auth.data.model.User;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,9 +34,6 @@ import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -109,7 +104,7 @@ public class EditProfileFragment extends Fragment {
         updatedUserData = new UserData();
 
         //Get the user document that contains information including name, email, self introduction, photo, etc.
-        // the user data is stored in a document and the name of the document is the unique userId in a collection called "Users"
+        //The user data is stored in a document and the name of the document is the unique userId in a collection called "Users"
         db.collection("Users").document(userId).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -121,11 +116,11 @@ public class EditProfileFragment extends Fragment {
 
                     if (userData != null) {
 
-                        //Update the value of the empty updatedUserData to the retrieved userData object variable
+                        //Update the value of the empty updatedUserData object to the retrieved userData object variable
                         updatedUserData = userData;
 
                         //Check if there is a photo because if the user signed up with the email option and then did not update his/her profile photo
-                        // the userData.getUserPhoto() will return null and we will leave the default avatar to be the one displayed
+                        //the userData.getUserPhoto() will return null and we will leave the default avatar to be the one displayed
                         if (userData.getUserPhoto() != null) {
 
                             Glide.with(EditProfileFragment.this).load(updatedUserData.getUserPhoto()).into(mDisplayedUserPhoto);
@@ -159,7 +154,6 @@ public class EditProfileFragment extends Fragment {
         });
 
         return rootView;
-
     }
 
     /**
@@ -198,7 +192,7 @@ public class EditProfileFragment extends Fragment {
             chosenPhotoUri = data.getData();
 
             //Load the image to be displayed in mDisplayedUserPhoto ImageView
-            Glide.with(this).load(chosenPhotoUri).into(mDisplayedUserPhoto);
+            Glide.with(EditProfileFragment.this).load(chosenPhotoUri).into(mDisplayedUserPhoto);
         }
     }
 
@@ -208,105 +202,47 @@ public class EditProfileFragment extends Fragment {
      */
     private void saveProfile() {
 
-//        uploadImageFile();
+        uploadImageFile();
 
         String updatedName = mUserNameEditText.getText().toString().trim();
         String updatedIntroduction = mUserIntroductionEditText.getText().toString().trim();
-
 
         if (!TextUtils.isEmpty(updatedName)) {
             updatedUserData.setUserDisplayName(updatedName);
         }
 
-
         if (!TextUtils.isEmpty(updatedIntroduction)) {
             updatedUserData.setUserIntroduction(updatedIntroduction);
         }
 
-        if (chosenPhotoUri != null) {
-//
-//            if the user picked a file then we want to ulpoad it to the firestore database
-//            files in the storage should have unique names to avoid overriding thefiles
-//            to have a unique name for each file, we can achieve this by naming the file based on the
-//            current time in milliseconds/ this will create a file name like users uploads/4217371773371839.jpg
-
-            StorageReference mStorageReference = FirebaseStorage.getInstance().getReference("users uploads");
-
-            final StorageReference fileReference = mStorageReference.child(System.currentTimeMillis()
-                    + "." + getFileExtension(chosenPhotoUri));
-
-            fileReference.putFile(chosenPhotoUri)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
-                            //Get a URL to the uploaded content taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
-
-//                            String downloadUrl = "";
-
-//                            if (taskSnapshot.getMetadata() != null && taskSnapshot.getMetadata().getReference() != null) {
-//
-//                                downloadUrl = taskSnapshot.getMetadata().getReference().getDownloadUrl().toString();
-//                                updatedUserData.setUserPhoto(downloadUrl);
-//                                db.collection("Users").document(userId).set(updatedUserData, SetOptions.merge());
-//                            }
-
-                            fileReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                @Override
-                                public void onSuccess(Uri uri) {
-
-                                    downloadUrl = uri.toString();
-                                    updatedUserData.setUserPhoto(downloadUrl);
-                                     saveData();
-//                                    db.collection("Users").document(userId).set(updatedUserData, SetOptions.merge());
-
-                                }
-                            });
-                        }
-
-                    }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    // Handle unsuccessful uploads
-                    Log.e("EditProfileFragment", e.toString());
-                    e.printStackTrace();
-                }
-            });
-        } else {
-
-            saveData();
-
-        }
-
-    }
-
-    private void saveData() {
-
         db.collection("Users").document(userId).set(updatedUserData, SetOptions.merge())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     public void onSuccess(Void aVoid) {
+
                         //if uploading data to database is successful
                         Log.d("EditProfileFragment", "User Data is updated and saved Successfully");
 
-
-                        if (getActivity() != null) {
-
-                            getActivity().setResult(RESULT_OK);
-
-                            getActivity().finish();
-                        }
                     }
+
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.e("EditProfileFragment", e.toString());
 
+                Log.e("EditProfileFragment", e.toString());
             }
         });
+
+        Toast.makeText(getActivity(), "Your Profile is updated successfully", Toast.LENGTH_SHORT).show();
+
+        if (getActivity() != null) {
+
+            getActivity().finish();
+        }
     }
 
     /**
      * This method will get the file extension from the image uri chosen and convert it to something like jpg for example
+     *
      * @param uri Uri: the image Uri chosen by the user when he/she opened the photo picker
      * @return String: Returns the formatted image file extension
      */
@@ -314,18 +250,20 @@ public class EditProfileFragment extends Fragment {
 
         ContentResolver contentResolver = null;
 
-        if(getActivity() != null){
+        if (getActivity() != null) {
 
-         contentResolver = getActivity().getContentResolver();
+            contentResolver = getActivity().getContentResolver();
         }
+
         MimeTypeMap mime = MimeTypeMap.getSingleton();
 
         String mimeType = null;
 
-        if(contentResolver != null) {
+        if (contentResolver != null) {
 
             mimeType = contentResolver.getType(uri);
         }
+
         return mime.getExtensionFromMimeType(mimeType);
     }
 
@@ -335,6 +273,43 @@ public class EditProfileFragment extends Fragment {
      */
     private void uploadImageFile() {
 
+        if (chosenPhotoUri != null) {
 
+            //if the user picked a file then first it will be uploaded to the Firebase Firestorage and if it's uploaded successfully then it
+            // will be stored in Firestore database, First declare and initialize an instance of a StorageReference and the bucket where the
+            // photos will be stored is "users uploads"
+            StorageReference mStorageReference = FirebaseStorage.getInstance().getReference("users uploads");
+
+            //The name of the photo file that will be uploaded will be based on the current time in milliseconds to avoid overriding
+            final StorageReference fileReference = mStorageReference.child(System.currentTimeMillis()
+                    + "." + getFileExtension(chosenPhotoUri));
+
+            fileReference.putFile(chosenPhotoUri)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                            //If uploading to Firestorage is successful, get a URL to the uploaded content and then store it in Firestore database
+                            fileReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+
+                                    downloadUrl = uri.toString();
+
+                                    updatedUserData.setUserPhoto(downloadUrl);
+
+                                    db.collection("Users").document(userId).set(updatedUserData, SetOptions.merge());
+                                }
+                            });
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+
+                    // Handle unsuccessful uploads
+                    Log.e("EditProfileFragment", e.toString());
+                }
+            });
+        }
     }
 }

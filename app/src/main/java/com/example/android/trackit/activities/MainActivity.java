@@ -1,4 +1,4 @@
-package com.example.android.trackit;
+package com.example.android.trackit.activities;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -8,24 +8,24 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.android.trackit.R;
+import com.example.android.trackit.main_fragments.SavedGamesFragment;
+import com.example.android.trackit.main_fragments.StartGameFragment;
+import com.example.android.trackit.main_fragments.UserProfileFragment;
 import com.example.android.trackit.models.UserData;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
-import com.google.common.collect.Sets;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -71,9 +71,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //Declaring and initializing the toolBar, the navigationView, and the navigationHeader object variables
         toolbar = findViewById(R.id.toolbar);
+
         NavigationView navigationView = findViewById(R.id.navigation_view);
 
-        //Calling getHeaderView gets the header view at the specified position in this case 0 which index header.
+        //Calling getHeaderView method on the navigationView gets the navigation header view at the specified position.
         View navigationHeader = navigationView.getHeaderView(0);
 
         //set the toolBar to act as the ActionBar for this Activity window.
@@ -81,13 +82,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //Declaring and initializing the ImageView and the two TextViews found in the navigationHeader
         userDisplayedPhoto = navigationHeader.findViewById(R.id.navigation_user_image);
+
         userDisplayedName = navigationHeader.findViewById(R.id.navigation_user_name);
+
         userDisplayedEmail = navigationHeader.findViewById(R.id.navigation_user_email);
 
         //Declaring and initializing an instance of FirebaseUser then check if the user is already signed in and not null
         mCurrentUser = auth.getCurrentUser();
 
         if (mCurrentUser != null) {
+
             //Get the userId from the currentUser and this Id is unique for every user and will be used to store data in FirebaseFirestore database
             userId = mCurrentUser.getUid();
         }
@@ -141,8 +145,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Synchronize the state of the drawer indicator/affordance with the linked DrawerLayout.
         toggle.syncState();
 
-        //In case the screen orientation changed from portrait to landscape, the savedInstanceState won't be null and the system won't
-        //recreate this fragment again and the user would still be in the fragment he/she selected. The StartGameFragment is the
+        //In case the screen orientation changed from portrait to landscape mode, the savedInstanceState won't be null and the system won't
+        //recreate the StartGameFragment again and the user would still be in the fragment he/she selected. The StartGameFragment is the
         // main/first fragment you see when the MainActivity is opened
         if (savedInstanceState == null) {
 
@@ -155,45 +159,51 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     /**
      * This method displays the name, email, and photo of the user stored in the user document in FirebaseFirestore database
      *
-     * @param retrievedData UserData: the user data retrieved from the document with userId name inside Users collection in FirebaseFirestore database
+     * @param retrievedData UserData: the user data retrieved from the document with userId as its name inside Users collection in FirebaseFirestore database
      */
     private void displayDatabaseInfo(UserData retrievedData) {
 
         String retrievedName = retrievedData.getUserDisplayName();
+
         String retrievedEmail = retrievedData.getUserEmail();
 
         userDisplayedName.setText(retrievedName);
+
         userDisplayedEmail.setText(retrievedEmail);
 
         //Check if there is a photo because if the user signed up with the email option which doesn't require a photo and then did not update his/her profile photo
         // the retrievedData.getUserPhoto() will return null and we will leave the default avatar to be the one displayed
         if (retrievedData.getUserPhoto() != null) {
+
             String retrievedPhoto = retrievedData.getUserPhoto();
-                Glide.with(userDisplayedPhoto).load(retrievedPhoto).into(userDisplayedPhoto);
+
+            Glide.with(this).load(retrievedPhoto).into(userDisplayedPhoto);
         }
     }
 
     /**
      * This method creates a user document in the FirebaseFirestore database in case the user is a new one. In this case
-     * we will display the data that is obtained from FirebaseAuth instance instead.
+     * we will display the data that is obtained from the FirebaseAuth instance instead.
      */
     private void createUserProfile() {
 
         String userName = mCurrentUser.getDisplayName();
+
         String userEmail = mCurrentUser.getEmail();
 
         //check if the user has a photo because if the user has signed up with the email option, he/she won't have a photo to be displayed
         String userProfilePhoto = null;
 
         if (mCurrentUser.getPhotoUrl() != null) {
+
             userProfilePhoto = mCurrentUser.getPhotoUrl().toString();
         }
 
         //Declaring and initializing a userData Object Variable that stores the user name, email, and photo if exists to be passed to the database
         UserData userData = new UserData(userName, userEmail, userProfilePhoto);
 
-        //Declaring and initializing a userDocumentReference based on the unique userId and the name of the document is the unique userId
-        // the user data is stored in a document and the name of the document is the unique userId in a collection called "Users
+        //Storing UserData by creating a User Document in Firestore database that will include the user name, the email, and the profile photo if it exists.
+        //The user data will be stored in a document and the name of the document is the unique userId in a collection called "Users
         userDocumentReference.set(userData).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
@@ -234,11 +244,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_new_game:
+
                 //Open the StartGameFragment by adding the fragment to the activity during the activity runtime.
                 //Declare and initialize a startGameFragment instance
                 StartGameFragment startGameFragment = new StartGameFragment();
+
                 //Call getSupportFragmentManager() to get a FragmentManager using the Support Library APIs.
                 FragmentManager fragmentManager = getSupportFragmentManager();
+
                 // Call beginTransaction() to create a FragmentTransaction and call replace() to add the fragment to
                 // the 'fragment_container' FrameLayout then call commit().
                 fragmentManager.beginTransaction().replace(R.id.fragment_container, startGameFragment).commit();
@@ -260,19 +273,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //Close the specified drawer mDrawerLayout by animating it out of view.
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-
-        if(requestCode == 0 && resultCode == RESULT_OK) {
-            Toast.makeText(this, "Your Profile is updated successfully", Toast.LENGTH_SHORT).show();
-
-
-        }
-
     }
 }
 

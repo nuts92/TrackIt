@@ -1,4 +1,4 @@
-package com.example.android.trackit;
+package com.example.android.trackit.main_fragments;
 
 
 import android.os.Bundle;
@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import com.example.android.trackit.R;
 
 /**
  * StartGameFragment subclass represents Start A New Game Screen which is the first fragment screen that is displayed
@@ -40,7 +42,7 @@ public class StartGameFragment extends Fragment {
                 // Create a new Fragment to be placed in the activity layout
                 UpdateTeamsFragment updateTeamsFragment = new UpdateTeamsFragment();
 
-                if(getActivity()!=null) {
+                if (getActivity() != null) {
                     //create a FragmentTransaction to begin the transaction and replace the Fragment
                     FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
                     // Replace whatever is in the fragment_container view with this fragment
@@ -55,5 +57,4 @@ public class StartGameFragment extends Fragment {
 
         return rootView;
     }
-
 }

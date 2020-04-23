@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/football_profile_background"
-    tools:context=".UserProfileFragment">
+    tools:context=".main_fragments.UserProfileFragment">
 
     <RelativeLayout
         android:id="@+id/user_information_layout"

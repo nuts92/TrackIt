@@ -1,15 +1,12 @@
-package com.example.android.trackit;
+package com.example.android.trackit.main_fragments;
 
 
 import android.content.Intent;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,11 +18,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.android.trackit.R;
+import com.example.android.trackit.activities.SignUpActivity;
+import com.example.android.trackit.activities.UpdateUserProfileActivity;
 import com.example.android.trackit.models.UserData;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -86,11 +84,12 @@ public class UserProfileFragment extends Fragment {
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
         if (currentUser != null) {
+
             //Get the currentUserId from the currentUser which will be used to get user data from FirebaseFirestore database
             userId = currentUser.getUid();
         }
 
-        //Check if the user has data stored in Firestore database by initializing a userDocumentReference based on the unique userId,
+        //Get the User data stored in Firestore database by initializing a userDocumentReference based on the unique userId,
         // the user data is stored in a document and the name of the document is the unique userId in a collection called "Users"
         DocumentReference userDocumentReference = db.collection("Users").document(userId);
 
@@ -127,7 +126,7 @@ public class UserProfileFragment extends Fragment {
                 //Open the UpdateUserProfileActivity through passing openIntent to startActivity method
                 Intent openIntent = new Intent(getActivity(), UpdateUserProfileActivity.class);
 
-                startActivityForResult(openIntent,0);
+                startActivity(openIntent);
             }
         });
 
@@ -158,7 +157,6 @@ public class UserProfileFragment extends Fragment {
             }
         });
 
-
         return rootView;
     }
 
@@ -167,7 +165,6 @@ public class UserProfileFragment extends Fragment {
      *
      * @param retrievedData UserData: is the user data stored in user document in Firestore database
      */
-
     private void displayDatabaseInfo(UserData retrievedData) {
 
         //Get the username, email, self introduction, and photo from the retreivedData Object
@@ -181,22 +178,15 @@ public class UserProfileFragment extends Fragment {
 
         //Display the retrieved username and email in the mUserNameView and mUserEmailView object variables
         mUserNameView.setText(userName);
+
         mUserEmailView.setText(userEmail);
 
         //if the retrieved user Introduction is not null then display it in the mUserSelfIntroductionView. Otherwise the default
-        //introduction will be displayed, this self introduction  will be null if the user didn't update it in EditProfile
+        //introduction will be displayed, this self introduction will be null if the user didn't update it in EditProfile
         if (userIntro != null) {
+
             mUserSelfIntroductionView.setText(userIntro);
         }
-
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//
-//            //For devices equal or higher than lollipop set the translation above everything else
-//            mUserProfilePhotoView.setTranslationZ(6);
-//
-//            //Redraw the view to show the translation
-//            mUserProfilePhotoView.invalidate();
-//        }
 
         //if the retrieved user photo is not null then display it in the mUserProfilePhotoView. Otherwise the default avatar
         // will be displayed, this photo will be null if the user signed up with the email option and did not update the profile photo.

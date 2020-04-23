@@ -6,7 +6,7 @@
     android:scrollbarAlwaysDrawVerticalTrack="true"
     android:scrollbarSize="10dp"
     android:scrollbarStyle="insideOverlay"
-    tools:context=".GameCounterFragment">
+    tools:context=".main_fragments.GameCounterFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

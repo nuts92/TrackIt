@@ -2,26 +2,22 @@
     <string name="app_name">TrackIt</string>
 
     <!-- A list of Strings for the Navigation Drawer Menu Items -->
-
     <string name="menu_profile">Profile</string>
     <string name="menu_how_to">How to use TrackIt</string>
     <string name="menu_new_game">Start A New Game</string>
     <string name="menu_games_list">Saved Games</string>
 
     <!-- A list of Strings that must be provided to the ActionBarDrawerToggle to describe the open/close drawer actions for accessibility services -->
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <!-- A list of Strings for TrackIt SignUp Authentication Screen-->
-
     <string name="sign_up_welcome_title">Welcome to TrackIt</string>
     <string name="sign_up_slogan_title">Track Your Team\'s Goals in time</string>
     <string name="continue_with_google_button">Continue with Google</string>
     <string name="continue_with_email_button">Continue with Email</string>
 
     <!-- A list of Strings for TrackIt Introduction Wizard Screen -->
-
     <string name="Introduction_step_one_title">TrackIt: Step One</string>
     <string name="introduction_step_one_description">To start tracking your Team\'s Goals in real time, click on Start A New Game Button.</string>
     <string name="introduction_step_two_title">TrackIt: Step Two</string>
@@ -35,11 +31,9 @@
     <string name="got_it_button">OK, Got It</string>
 
     <!-- A String for StartGameFragment Screen -->
-
     <string name="start_a_new_game_button">Start A New Game</string>
 
     <!-- A list of Strings for UpdateTeamsFragment Screen -->
-
     <string name="update_teams_fragment_title">Name Your Teams</string>
     <string name="update_teams_fragment_home_team">Home</string>
     <string name="update_teams_fragment_away_team">Away</string>
@@ -49,7 +43,6 @@
     <string name="update_teams_fragment_home_hint">Ex: Germany</string>
 
     <!-- A list of Strings for GameCounterFragment Screen -->
-
     <string name="game_counter_fragment_home_title">Home</string>
     <string name="game_counter_fragment_zero_text">0</string>
     <string name="game_counter_fragment_reset_button">Reset</string>
@@ -60,7 +53,6 @@
     <string name="game_counter_fragment_reset_button_change">Start A New Game</string>
 
     <!-- A list of Strings for the GameCounter Final Results-->
-
     <string name="default_home_name">Home</string>
     <string name="default_away_name">Away</string>
     <string name="winner_home">Home</string>
@@ -68,24 +60,20 @@
     <string name="tie">Tie</string>
 
     <!-- A list of Strings for the SaveGame Popup Card -->
-
     <string name="save_game_popup_call_to_action">Start A New Game</string>
     <string name="save_game_popup_win_situation">Congratulations, You Won!</string>
     <string name="save_game_popup_loss_situation">Good Luck Next Time!</string>
     <string name="save_game_popup_tie_situation">Tie! Next Time Your Team will win</string>
 
     <!-- A list of Strings for the UserProfileFragment Screen -->
-
     <string name="user_profile_self_intoduction">I\'m a Soccer Fanatic that when I love a team so much, I make it part of my life.</string>
     <string name="user_profile_update_button">Update</string>
     <string name="user_profile_logout_button">Log Out</string>
 
     <!-- A String for the SavedGamesFragment Screen in case there are no saved games yet -->
-
     <string name="saved_games_fragment_no_saved_games_title">No Saved Games Yet</string>
 
     <!-- A list of Strings for the EditProfileFragment Screen-->
-
     <string name="edit_profile_fragment_title">Update Your Profile</string>
     <string name="edit_profile_fragment_name_hint">Display Name</string>
     <string name="edit_profile_fragment_introduction_hint">Intro about yourself (Max 3 Lines)</string>
