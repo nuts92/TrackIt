@@ -55,11 +55,30 @@ However, if the user chooses to signs up with the Email Option and the user was 
 
  When the user signs up with either option, the user data is extracted from the Firebase Auth instance and a user profile document is created and stored in Firebase Firestore database so that we can display the user information in different places in the App using this document and also so that when the user wants to update his/her profile, the updated data will be merged
  with the currently existing user data stored in this document replacing it. Each user document is named after the unique 
- uUser Id and stored inside a collection called “Users” as displayed in the screenshot below.
+ User Id and stored inside a collection called “Users” as displayed in the screenshot below.
  
- ### FireStore Database Screenshot:
+ ### FireStore Database Users Collection Screenshot:
  
   <img src="https://i.imgur.com/wrbzccs.png">  <img src="https://i.imgur.com/MqWLlx4.png">
+  
+  ### Starting A New Game Process:
+  
+Now the user has signed up successfully and logged in to the MainActivity. The MainActivity consists of a Navigation Drawer where the user can navigate between different sections(fragments) of the App includeing Start a New Game, How to use TrackIt Guide, User Profile, and Saved Games List. The first and main screen that appears to the user when he/she signs in is the Start A New Game Screen as shown below. When the user clicks on the Start button, he/she is redirected to a screen where he/she can update the teams' names. Whether the user chooses to update the teams' names or skip this part, he/she will be redirected to the Soccer Counter screen. 
+
+  ### Starting A New Game Process Screenshots:
+  
+   <img src="https://i.imgur.com/t8QMdzf.png" width="300"> <img src="https://i.imgur.com/4TXRdGH.png" width="300">
+   <img src="https://i.imgur.com/5rLPGzH.png" width="300"> 
+   
+ ### Soccer Counter Screen:
+ 
+Here the user can track the goals and fouls of both the home team and the away team in real time. When the user is done, he/she can choose to save the game result. When the user saves the game result, a popup card shows up with an animation based on the game result and a call to action that prompts the user to start a new game. Also, A toast message is displayed showing that the game is saved. The goal and foul buttons are disabled, the save game button disappears and the reset button is replaced with start a new game button.
+
+ ### Soccer Counter Screen Game Resulst:
+
+<img src="https://i.imgur.com/tGOqVd2.png" width="300"> <img src="https://i.imgur.com/OgfXE0X.png" width="300"> 
+
+ 
  
  ### Firebase Authentication Screenshot:
  <img src="https://i.imgur.com/BWknrKQ.png" width="300"> <img src="https://i.imgur.com/ZYmQ4Us.png" width="300">
