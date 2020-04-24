@@ -102,7 +102,7 @@ The user has the option to share the game result with friends by clicking on the
    
 ### User Profile
   
-Every user has a profile where the name and email are displayed along with profile photo if the user signed up with the google option. However, if the user signed up with the email option then the displayed photo in the user profile would be the default avatar. Also, every user can have a small self introduction about him/her self and if the user is new meaning signed up for the first time, the self introduction displayed will be the default one as shown below. Every user can choose to update the profile by clicking on the update button and now he/she can choose a profile photo, a display name, and a self introduction that he/she likes. The new updates will be displayed now in the user profile in addition to the navigation view header as shown below.
+Every user has a profile where the name and the email are displayed along with the profile photo if the user has signed up with the Google option. However, if the user has signed up with the Email option then the displayed photo in the user profile will be the default avatar. Also, every user can have a small self introduction about him/her self and if the user is new meaning signed up for the first time, the self introduction displayed will be the default one as shown below. Every user can choose to update the profile by clicking on the update button and now he/she can choose a profile photo, a display name, and a self introduction that he/she likes. The new updates will be saved in Firestore database and displayed in the user profile in addition to the navigation view header as shown below.
 
 ### User Profile Screenshots
   
