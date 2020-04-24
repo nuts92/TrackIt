@@ -90,7 +90,7 @@ The game counter also takes into consideration configuration changes like rotati
 If the user wants to view the saved games, he/she should click on the hamburger icon at the top in the toolbar and the navigation drawer will open, then the user should select saved games option and all the saved games will be displayed in the form of cards ordered by timestamp or by date showing the latest game result first.
 
   ### Saved Games Screenshot
-  <img src="https://i.imgur.com/pihIf2M.png" width="300">
+   <img src="https://i.imgur.com/N4HxAdq.png" width="300"> <img src="https://i.imgur.com/pihIf2M.png" width="300">
   
   
 
