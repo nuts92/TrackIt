@@ -107,6 +107,12 @@ Every user has a profile where the name and email are displayed along with profi
   
 <img src="https://i.imgur.com/b7cea32.png" width="300"> <img src="https://i.imgur.com/OPze6Vr.png" width="300">  <img src="https://i.imgur.com/jzqwxzV.png" width="300"> <img src="https://i.imgur.com/V2aywKN.png" width="300"> <img src="https://i.imgur.com/VGCZoMT.png" width="300">
 
+### Creative Assets Copyrights
+All the drawable resources used in this project are all MIT Licensed which are free of Copyrights and can be used without attributions.
+
+### Dowload the App
+To use this repository, fork/clone it, or download a zip using the green "Clone or download" button at the top of the file list.  
+
 
 
    
